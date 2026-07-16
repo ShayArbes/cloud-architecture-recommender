@@ -105,7 +105,7 @@ progress checklist (§2 below) updated.
 
 ### Sprint 0 — Foundation
 - [x] S0.1 Repo scaffolding (`.gitignore`, `.env.example`, layout, README skeleton)
-- [ ] S0.2 Backend skeleton (FastAPI factory, config, logging, `/health`, tooling)
+- [x] S0.2 Backend skeleton (FastAPI factory, config, logging, `/health`, tooling)
 - [ ] S0.3 Frontend skeleton (Vite + React + TS strict, lint, app shell)
 - [ ] S0.4 Compose skeleton (MongoDB service, backend connectivity)
 
