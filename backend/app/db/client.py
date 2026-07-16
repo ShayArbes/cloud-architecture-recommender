@@ -9,13 +9,14 @@ import logging
 from typing import Any, cast
 
 from fastapi import Request
-from motor.motor_asyncio import AsyncIOMotorClient
+from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 
 logger = logging.getLogger(__name__)
 
 # Motor's client is generic over the document type; plain dicts at this layer —
 # repositories convert them into Pydantic domain models before returning.
 MongoClient = AsyncIOMotorClient[dict[str, Any]]
+MongoDatabase = AsyncIOMotorDatabase[dict[str, Any]]
 
 
 def create_client(mongo_uri: str) -> MongoClient:
@@ -23,8 +24,9 @@ def create_client(mongo_uri: str) -> MongoClient:
 
     The connection is lazy — no network call happens until the first
     operation — so this is safe to call at startup before MongoDB is reachable.
+    ``tz_aware`` keeps every timestamp UTC-aware end to end (CLAUDE.md §5).
     """
-    return AsyncIOMotorClient(mongo_uri)
+    return AsyncIOMotorClient(mongo_uri, tz_aware=True)
 
 
 def get_mongo_client(request: Request) -> MongoClient:

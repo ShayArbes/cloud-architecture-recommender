@@ -103,3 +103,25 @@ class CostProfile(StrEnum):
     LOW = "low"
     MEDIUM = "medium"
     HIGH = "high"
+
+
+# ---------------------------------------------------------------------------
+# Scrape job lifecycle (CLAUDE.md §5.2)
+# ---------------------------------------------------------------------------
+
+
+class ScrapeJobStatus(StrEnum):
+    """Lifecycle state of a scrape run."""
+
+    PENDING = "pending"
+    RUNNING = "running"
+    COMPLETED = "completed"
+    FAILED = "failed"
+
+
+class TriggerSource(StrEnum):
+    """What initiated a scrape job."""
+
+    API = "api"
+    SEED = "seed"
+    MANUAL = "manual"
