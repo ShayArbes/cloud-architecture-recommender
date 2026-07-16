@@ -1,0 +1,749 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    
+    
+    
+    
+    
+    
+    
+    
+    <meta name="service-name" content="Distributed Load Testing on AWS" />
+    <meta name="guide-name" content="Landing Page" />
+    <link rel='canonical' href='https://docs.aws.amazon.com//solutions/distributed-load-testing-on-aws//'/>
+    
+    <meta name="landing-page-locale" content="en_us">
+    <link rel="icon" type="image/ico" href="/assets/r/images/favicon.ico" />
+    <link rel="shortcut icon" type="image/ico" href="/assets/r/images/favicon.ico" />
+    <link rel='alternate' type='text/markdown' href='https://docs.aws.amazon.com//solutions/distributed-load-testing-on-aws//index.md'/>
+     <script defer src="/assets/r/awsdocs-landing-page.2.0.0.js"></script>
+
+    <script id="awsc-panorama-bundle" type="text/javascript" src="https://prod.pa.cdn.uis.awsstatic.com/panorama-nav-init.js" data-config="{'appEntity':'aws-documentation','region':'us-east-1', 'service':'/solutions/distributed-load-testing-on-aws/'}" defer></script>
+  </head>
+  <body class="awsdocs awsui awsui-visual-refresh landing-page">
+    <input type="text" id="landing-page-xml" style="display: none;" value="%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0A%3Clanding-page%20version%3D%223.0%22%3E%0A%20%20%20%3Ctitle%3EDistributed%20Load%20Testing%20on%20AWS%3C%2Ftitle%3E%0A%20%20%20%3Ctitleabbrev%3EDistributed%20Load%20Testing%20on%0A%20%20%20%20AWS%0A%20%20%3C%2Ftitleabbrev%3E%0A%20%20%20%3Cabstract%3EAutomate%20performance%20testing%20at%20scale%20for%20better%20reliability%20and%20efficiency%0A%20%20%3C%2Fabstract%3E%0A%20%20%20%3CfeedbackCTI%3Ef48c35bd-3ead-4c57-9ea2-9867310cd382%3C%2FfeedbackCTI%3E%0A%20%20%20%3Cactions%3E%0A%20%20%20%20%20%20%3Caction%20href%3D%22https%3A%2F%2Fus-east-1.console.aws.amazon.com%2Flaunchwizard%2Fhome%3FredirectId%3DSolutionWeb%26amp%3Bregion%3Dus-east-1%23%2Fdeployment%2Fcreate%2FSO0062%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20type%3D%22primary%22%3E%0A%20%20%20%20%20%20Deploy%20now%0A%20%20%20%20%3C%2Faction%3E%0A%20%20%20%20%20%20%3Caction%20href%3D%22https%3A%2F%2Fapp.storylane.io%2Fshare%2Fex5incxsdlaw%22%20type%3D%22normal%22%3E%0A%20%20%20%20%20%20View%20demo%0A%20%20%20%20%3C%2Faction%3E%0A%20%20%20%3C%2Factions%3E%0A%20%20%20%3Cmetadata%3E%0A%20%20%20%20%20%20%3Ctitle%3EAbout%20this%20deployment%3C%2Ftitle%3E%0A%20%20%20%20%20%20%3Cmetadata-items%3E%0A%20%20%20%20%20%20%20%20%20%3Cmetadata-item%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ckey%3EVersion%3C%2Fkey%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cvalue%3E4.1.5%3C%2Fvalue%3E%0A%20%20%20%20%20%20%20%20%20%3C%2Fmetadata-item%3E%0A%20%20%20%20%20%20%20%20%20%3Cmetadata-item%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ckey%3EReleased%3C%2Fkey%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cvalue%3E07%2F2026%3C%2Fvalue%3E%0A%20%20%20%20%20%20%20%20%20%3C%2Fmetadata-item%3E%0A%20%20%20%20%20%20%20%20%20%3Cmetadata-item%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ckey%3EEst.%20deployment%20time%3C%2Fkey%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cvalue%3E15%20mins%3C%2Fvalue%3E%0A%20%20%20%20%20%20%20%20%20%3C%2Fmetadata-item%3E%0A%20%20%20%20%20%20%20%20%20%3Cmetadata-item%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ckey%3EEstimated%20cost%3C%2Fkey%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cvalue%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Clink%20href%3D%22%2Fsolutions%2Flatest%2Fdistributed-load-testing-on-aws%2Fcost.html%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20See%20details%0A%20%20%20%20%20%20%20%20%20%20%3C%2Flink%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fvalue%3E%0A%20%20%20%20%20%20%20%20%20%3C%2Fmetadata-item%3E%0A%20%20%20%20%20%20%20%20%20%3Cmetadata-item%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ckey%3EImplementation%20guide%3C%2Fkey%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cvalue%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Clink%20href%3D%22%2Fsolutions%2Flatest%2Fdistributed-load-testing-on-aws%2Fsolution-overview.html%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20View%20guide%0A%20%20%20%20%20%20%20%20%20%20%3C%2Flink%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fvalue%3E%0A%20%20%20%20%20%20%20%20%20%3C%2Fmetadata-item%3E%0A%20%20%20%20%20%20%3C%2Fmetadata-items%3E%0A%20%20%20%3C%2Fmetadata%3E%0A%20%20%20%3Csections%3E%0A%20%20%20%20%20%20%3Csection%20id%3D%22overview%22%3E%0A%20%20%20%20%20%20%20%20%20%3Ctitle%3EOverview%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%3Cabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Simulate%20hundreds%20to%20millions%20of%20concurrent%20users%20against%20any%20endpoint%2C%20in%20any%20AWS%20Region%2C%20without%20provisioning%20a%20single%20server.%0A%20%20%20%20%20%20%20%20%20%20%20%20Distributed%20Load%20Testing%20on%20AWS%20is%20an%20open-source%20solution%20that%20automates%20performance%20testing%20at%20scale%2C%20demonstrating%20how%0A%20%20%20%20%20%20%20%20%20%20%20%20systems%20behave%20under%20different%20load%20conditions%20and%20helping%20identify%20potential%20performance%20issues%20throughout%20their%20lifecycle.%20The%20solution%0A%20%20%20%20%20%20%20%20%20%20%20%20automatically%20launches%20and%20manages%20distributed%20test%20runners%20within%20and%20across%20AWS%20Regions%2C%20providing%20insights%20into%20the%20scalability%20and%0A%20%20%20%20%20%20%20%20%20%20%20%20reliability%20of%20your%20Amazon%20EC2%20instances%2C%20Amazon%20ECS%20or%20Amazon%20EKS%20clusters%2C%20AWS%20Lambda%20functions%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20Amazon%20RDS%20databases%2C%20and%20Amazon%20CloudFront%20distributions.%0A%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20This%20solution%20supports%20JMeter%2C%20k6%2C%20and%20Locust%20testing%20frameworks%2C%20single%20HTTP%20endpoint%20tests%2C%20and%20provides%20comprehensive%20analytics%0A%20%20%20%20%20%20%20%20%20%20%20%20capabilities.%20Set%20test%20baselines%20to%20compare%20results%20throughout%20your%20application%20lifecycle%20and%20deploy%20the%20optional%20MCP%20server%20to%20build%0A%20%20%20%20%20%20%20%20%20%20%20%20AI-powered%20analytics.%20Streamline%20test%20execution%2C%20analyze%20regression%20over%20time%2C%20and%20gain%20deeper%20visibility%20into%20system%20behavior.%0A%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%3C%2Fabstract%3E%0A%20%20%20%20%20%20%3C%2Fsection%3E%0A%20%20%20%20%20%20%3Csection%20id%3D%22benefits%22%3E%0A%20%20%20%20%20%20%20%20%20%3Ctitle%3EBenefits%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%3Ccollapsible-container%20id%3D%22account-global-users%22%20expand-section%3D%22account-global-users%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EDistribute%20load%20across%20regions%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ccards%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Clayout%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ccolumns%20xxs%3D%221%22%20m%3D%221%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Flayout%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Csimple-card%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3E%20%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Optimize%20your%20application%20performance%20by%20simulating%20real-world%20traffic%20from%20multiple%20AWS%20Regions%20to%20assess%20how%20your%20application%20behaves%20under%20diverse%20geographic%20loads.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fsimple-card%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fcards%3E%0A%20%20%20%20%20%20%20%20%20%3C%2Fcollapsible-container%3E%0A%20%20%20%20%20%20%20%20%20%3Ccollapsible-container%20id%3D%22automate-load-testing%22%20expand-section%3D%22account-global-users%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EQuickly%20analyze%20test%20results%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ccards%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Clayout%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ccolumns%20xxs%3D%221%22%20m%3D%221%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Flayout%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Csimple-card%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3E%20%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Easily%20access%20test%20run%20and%20results%20data%20through%20the%20dashboard%20that%20supports%20downloadable%2C%20tabular%20views%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20as%20well%20as%20access%20to%20raw%20performance%20metrics%2C%20error%20summaries%2C%20and%20latency%20data%20for%20better%20analysis%20and%20reporting.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fsimple-card%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fcards%3E%0A%20%20%20%20%20%20%20%20%20%3C%2Fcollapsible-container%3E%0A%20%20%20%20%20%20%20%20%20%3Ccollapsible-container%20id%3D%22adapt-tools%22%20expand-section%3D%22account-global-users%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EAutomate%20insights%20with%20agentic%20AI%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ccards%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Clayout%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ccolumns%20xxs%3D%221%22%20m%3D%221%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Flayout%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Csimple-card%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3E%20%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Deploy%20the%20optional%20MCP%20server%20to%20connect%20DLT%20with%20agentic%20AI%20workflows.%20Automate%20performance%20analysis%2C%20compare%20test%20results%20against%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20observability%20metrics%20and%20application%20changes%2C%20and%20accelerate%20root%20cause%20identification%20without%20manual%20investigation.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fsimple-card%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fcards%3E%0A%20%20%20%20%20%20%20%20%20%3C%2Fcollapsible-container%3E%0A%20%20%20%20%20%20%20%20%20%3Ccollapsible-container%20id%3D%22flexible-hosting%22%20expand-section%3D%22account-global-users%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EDeploy%20behind%20any%20network%20boundary%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ccards%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Clayout%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ccolumns%20xxs%3D%221%22%20m%3D%221%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Flayout%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Csimple-card%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3E%20%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Choose%20from%20three%20console%20hosting%20options%3A%20Amazon%20CloudFront%20with%20Amazon%20Simple%20Storage%20Service%20for%20public%20delivery%2C%20Application%20Load%20Balancer%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20with%20Amazon%20Elastic%20Container%20Service%20on%20AWS%20Fargate%20for%20restricted%20networks%2C%20or%20a%20headless%20backend-only%20deployment%20for%20self-hosting%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20behind%20your%20corporate%20network.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fsimple-card%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fcards%3E%0A%20%20%20%20%20%20%20%20%20%3C%2Fcollapsible-container%3E%0A%20%20%20%20%20%20%20%20%20%3Ccollapsible-container%20id%3D%22optimize-costs%22%20expand-section%3D%22account-global-users%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EOptimize%20resource%20costs%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ccards%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Clayout%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ccolumns%20xxs%3D%221%22%20m%3D%221%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Flayout%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Csimple-card%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3E%20%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Right-size%20your%20infrastructure%20by%20gaining%20accurate%20insights%20into%20how%20your%20applications%20perform%20under%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20varying%20load%20conditions%2C%20resulting%20in%20cost-effective%20resource%20allocation.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fsimple-card%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fcards%3E%0A%20%20%20%20%20%20%20%20%20%3C%2Fcollapsible-container%3E%0A%20%20%20%20%20%20%3C%2Fsection%3E%0A%20%20%20%20%20%20%3Csection%20id%3D%22how-it-works%22%3E%0A%20%20%20%20%20%20%20%20%20%3Ctitle%3EHow%20it%20works%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%3Cabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Choose%20from%20three%20web%20console%20hosting%20options%20to%20match%20your%20network%20and%20compliance%20requirements.%20The%20default%20uses%20Amazon%20CloudFront%20with%0A%20%20%20%20%20%20%20%20%20%20%20%20Amazon%20Simple%20Storage%20Service%20for%20fast%20public%20delivery.%20For%20environments%20that%20restrict%20public%20Amazon%20CloudFront%20distributions%2C%20deploy%20with%0A%20%20%20%20%20%20%20%20%20%20%20%20Application%20Load%20Balancer%20and%20Amazon%20Elastic%20Container%20Service%20on%20AWS%20Fargate.%20For%20complete%20network%20isolation%2C%20use%20the%20headless%20option%0A%20%20%20%20%20%20%20%20%20%20%20%20that%20deploys%20the%20backend%20only%20and%20lets%20you%20host%20the%20console%20on%20your%20own%20web%20server.%20All%20options%20share%20the%20same%20backend%20and%0A%20%20%20%20%20%20%20%20%20%20%20%20Amazon%20Cognito%20authentication.%0A%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20You%20can%20automatically%20deploy%20this%20architecture%20using%20the%20implementation%20guide%20and%20the%20accompanying%20AWS%20CloudFormation%20template.%0A%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ca%20href%3D%22%2Fsolutions%2Flatest%2Fdistributed-load-testing-on-aws%2Fsolution-overview.html%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20View%20implementation%20guide%0A%20%20%20%20%20%20%20%20%20%20%3C%2Fa%3E%0A%20%20%20%20%20%20%20%20%20%3C%2Fabstract%3E%0A%20%20%20%20%20%20%20%20%20%3Cdiagram-flow%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cimage%20alt%3D%22Distributed%20Load%20Testing%20Architecture%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20magnifier%3D%22true%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20src%3D%22%2Fimages%2Fsolutions%2Fdistributed-load-testing-on-aws%2Fimages%2Farchitecture-diagram.png%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cflow-steps%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EStep%201%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%28CloudFront%20%2B%20S3%20hosting%20deployment%20option%29%20The%20Console%20User%20accesses%20the%20web%20console%20through%20Amazon%20CloudFront%2C%20which%20serves%20the%20AWS%20Amplify%20application%20hosted%20in%20an%20Amazon%20Simple%20Storage%20Service%20%28Amazon%20S3%29%20bucket.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EStep%202%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%28ALB%20%2B%20ECS%20Fargate%20hosting%20deployment%20option%29%20The%20Console%20User%20accesses%20the%20web%20console%20through%20an%20Application%20Load%20Balancer%2C%20which%20routes%20traffic%20to%20the%20AWS%20Amplify%20application%20running%20on%20Amazon%20Elastic%20Container%20Service%20%28Amazon%20ECS%29%20on%20AWS%20Fargate%20inside%20an%20Amazon%20Virtual%20Private%20Cloud%20%28Amazon%20VPC%29.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EStep%203%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%28Headless%20deployment%20option%29%20No%20public%20front%20end%20is%20deployed.%20The%20solution%20provides%20the%20web%20console%20as%20a%20downloadable%20ZIP%20in%20a%20private%20Amazon%20S3%20bucket.%20The%20Console%20User%20can%20access%20the%20console%20from%20a%20self-hosted%20web%20server.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EStep%204%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20During%20initial%20configuration%2C%20the%20solution%20creates%20a%20default%20administrator%20user%20in%20the%20Amazon%20Cognito%20user%20pool%20and%20sends%20an%20account%20creation%20email%20to%20the%20email%20address%20you%20provide.%20The%20Cognito%20user%20pool%20manages%20user%20access%20to%20the%20web%20console%2C%20the%20REST%20API%2C%20the%20CLI%2C%20and%20the%20MCP%20Server.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EStep%205%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Amazon%20API%20Gateway%20invokes%20AWS%20Lambda%20microservices%20that%20provide%20the%20business%20logic%20to%20manage%20test%20data%20and%20run%20the%20tests.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EStep%206%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20The%20microservices%20interact%20with%20Amazon%20S3%2C%20Amazon%20DynamoDB%2C%20and%20Amazon%20EventBridge%20to%20store%20test%20scenario%20details%20and%20manage%20test%20schedules.%20When%20you%20schedule%20a%20test%20to%20run%20at%20a%20future%20time%20or%20on%20a%20recurring%20interval%2C%20the%20microservices%20create%20an%20EventBridge%20Scheduler%20schedule%20that%20invokes%20the%20microservice%20at%20the%20scheduled%20time.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EStep%207%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20To%20run%20a%20test%2C%20the%20microservices%20invoke%20AWS%20Step%20Functions%2C%20which%20orchestrates%20the%20test%20execution.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EStep%208%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Amazon%20EventBridge%20rules%20route%20Amazon%20ECS%20task%20and%20Step%20Functions%20failure%20events%20to%20a%20failure%20handler%20Lambda%20function.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EStep%209%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Step%20Functions%20launches%20Amazon%20Elastic%20Container%20Service%20%28Amazon%20ECS%29%20tasks%20on%20AWS%20Fargate%20in%20each%20AWS%20Region%20you%20selected.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EStep%2010%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Each%20task%20runs%20within%20an%20Amazon%20Virtual%20Private%20Cloud%20%28Amazon%20VPC%29%20in%20the%20selected%20Region.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EStep%2011%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20The%20load%20testing%20container%20uses%20an%20Amazon%20Linux%202023%20base%20image%20with%20the%20%3Ca%20href%3D%22https%3A%2F%2Fgettaurus.org%2F%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20rel%3D%22noopener%20noreferrer%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20target%3D%22_blank%22%3ETaurus%3Cawsui-icon%20class%3D%22awsdocs-link-icon%22%20name%3D%22external%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fa%3E%20test%20automation%20framework%20installed.%20Taurus%20executes%20your%20JMeter%2C%20k6%2C%20Locust%2C%20or%20Single%20HTTP%20Endpoint%20test.%20The%20container%20images%20are%20hosted%20by%20AWS%20in%20an%20Amazon%20Elastic%20Container%20Registry%20%28Amazon%20ECR%29%20public%20repository.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EStep%2012%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Each%20Fargate%20task%20writes%20its%20per-Region%20test%20results%20to%20Amazon%20S3%20and%20emits%20logs%20to%20Amazon%20CloudWatch.%20When%20all%20Regions%20complete%2C%20the%20microservices%20aggregate%20the%20results%20in%20DynamoDB.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EStep%2013%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20If%20you%20enable%20the%20live%20data%20option%2C%20a%20Lambda%20function%20receives%20CloudWatch%20logs%20from%20Fargate%20tasks%20during%20the%20test.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EStep%2014%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20The%20Lambda%20function%20publishes%20the%20logs%20to%20a%20topic%20in%20AWS%20IoT%20Core%20in%20the%20Region%20where%20the%20main%20stack%20is%20deployed.%20The%20web%20console%20subscribes%20to%20the%20topic%20to%20display%20real-time%20metrics%20while%20the%20test%20runs.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EStep%2015%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%28Optional%20CLI%20access%29%20Users%20can%20install%20the%20DLT%20command-line%20interface%20%28CLI%29%20locally%20to%20interact%20with%20the%20solution%20from%20their%20terminal.%20The%20CLI%20authenticates%20through%20Cognito%20and%20calls%20the%20REST%20API%20directly%2C%20enabling%20scripted%20automation%20and%20CI%2FCD%20integration.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3ENOTE%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20The%20following%20steps%20describe%20the%20optional%20MCP%20Server%20integration%20for%20AI-assisted%20load%20testing%20analysis.%20This%20component%20is%20only%20deployed%20if%20you%20select%20the%20MCP%20Server%20option%20during%20solution%20deployment.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EStep%2016%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20An%20MCP%20client%20%28AI%20development%20tool%29%20connects%20to%20the%20Amazon%20Bedrock%20AgentCore%20Gateway%20endpoint%20to%20access%20the%20Distributed%20Load%20Testing%20solution%27s%20data%20through%20the%20Model%20Context%20Protocol.%20AgentCore%20Gateway%20validates%20the%20user%27s%20Cognito%20authentication%20token%20to%20ensure%20authorized%20access%20to%20the%20MCP%20Server.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EStep%2017%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Upon%20successful%20authentication%2C%20AgentCore%20Gateway%20forwards%20the%20MCP%20tool%20request%20to%20the%20DLT%20MCP%20Server%20Lambda%20function.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EStep%2018%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20The%20Lambda%20function%20processes%20the%20request%20and%20queries%20the%20appropriate%20AWS%20resources%20%28DynamoDB%20tables%2C%20S3%20buckets%2C%20or%20CloudWatch%20logs%29%20to%20retrieve%20the%20requested%20load%20testing%20data.%20It%20then%20returns%20the%20structured%20data%20to%20AgentCore%20Gateway%2C%20which%20sends%20it%20back%20to%20the%20MCP%20client%20for%20AI-assisted%20analysis%20and%20insights.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fdescription%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fflow-step%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fflow-steps%3E%0A%20%20%20%20%20%20%20%20%20%3C%2Fdiagram-flow%3E%0A%20%20%20%20%20%20%3C%2Fsection%3E%0A%20%20%20%20%20%20%3Csection%20id%3D%22deploy%22%3E%0A%20%20%20%20%20%20%20%20%20%3Ctitle%3EDeploy%20with%20confidence%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%3Cabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Everything%20you%20need%20to%20launch%20this%20AWS%20Solution%20in%20your%20account%20is%20right%20here.%0A%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%3C%2Fabstract%3E%0A%20%20%20%20%20%20%20%20%20%3Ccards%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Clayout%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ccolumns%20xxs%3D%222%22%20m%3D%223%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Flayout%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Csimple-card%20variant%3D%22container%22%20guide%3D%22true%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EWe%27ll%20walk%20you%20through%20it%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Get%20started%20fast.%20Read%20the%20implementation%20guide%20for%20deployment%20steps%2C%20architecture%20details%2C%20cost%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20information%2C%20and%20customization%20options.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cfooter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cembeddable-link%20href%3D%22%2Fsolutions%2Flatest%2Fdistributed-load-testing-on-aws%2Fsolution-overview.html%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Open%20guide%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fembeddable-link%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Ffooter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fsimple-card%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Csimple-card%20variant%3D%22container%22%20guide%3D%22true%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3ELet%27s%20make%20it%20happen%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Ready%20to%20deploy%3F%20AWS%20Launch%20Wizard%20walks%20you%20through%20setup%20in%20the%20AWS%20Console%2C%20where%20you%20can%20choose%20from%20three%20hosting%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20templates%20to%20match%20your%20network%20requirements.%20You%27ll%20be%20prompted%20to%20access%20your%20AWS%20account%20if%20you%20haven%27t%20yet%20logged%20in.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cfooter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cembeddable-link%20href%3D%22https%3A%2F%2Fus-east-1.console.aws.amazon.com%2Flaunchwizard%2Fhome%3FredirectId%3DSolutionWeb%26amp%3Bregion%3Dus-east-1%23%2Fdeployment%2Fcreate%2FSO0062%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20AWS%20Launch%20Wizard%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fembeddable-link%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Ffooter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fsimple-card%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Csimple-card%20variant%3D%22container%22%20guide%3D%22true%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EPrepare%20for%20high-traffic%20events%20with%20confidence%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20AWS%20Countdown%20Premium%20Short%20Term%20Engagements%20for%20Distributed%20Load%20Testing%20helps%20you%20identify%20bottlenecks%2C%20scalability%20limitations%2C%20and%20infrastructure%20constraints%20before%20they%20impact%20your%20business.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cfooter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cembeddable-link%20href%3D%22https%3A%2F%2Faws.amazon.com%2Fpremiumsupport%2Faws-countdown%2Fboost%2F%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Sign%20up%20now%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fembeddable-link%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Ffooter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fsimple-card%3E%0A%20%20%20%20%20%20%20%20%20%3C%2Fcards%3E%0A%20%20%20%20%20%20%3C%2Fsection%3E%0A%20%20%20%20%20%20%3Csection%20id%3D%22deployment-tools%22%3E%0A%20%20%20%20%20%20%20%20%20%3Ctitle%3EDeployment%20tools%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%3Cabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3EFollow%20these%20links%20for%20direct%20access%20to%20the%20artifacts%20for%20this%20AWS%20Solution.%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%3C%2Fabstract%3E%0A%20%20%20%20%20%20%20%20%20%3Ccards%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Clayout%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ccolumns%20xxs%3D%222%22%20m%3D%223%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Flayout%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Csimple-card%20variant%3D%22container%22%20guide%3D%22true%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3ECloudFormation%20templates%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Download%20the%20CloudFormation%20template%20for%20your%20preferred%20hosting%20option.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cfooter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cembeddable-link%20href%3D%22https%3A%2F%2Fsolutions-reference.s3.amazonaws.com%2Fdistributed-load-testing-on-aws%2Flatest%2Fdistributed-load-testing-on-aws.template%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Amazon%20CloudFront%20%2B%20S3%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fembeddable-link%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cembeddable-link%20href%3D%22https%3A%2F%2Fsolutions-reference.s3.amazonaws.com%2Fdistributed-load-testing-on-aws%2Flatest%2Fdistributed-load-testing-on-aws-alb-ecs.template%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20ALB%20%2B%20ECS%20on%20Fargate%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fembeddable-link%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cembeddable-link%20href%3D%22https%3A%2F%2Fsolutions-reference.s3.amazonaws.com%2Fdistributed-load-testing-on-aws%2Flatest%2Fdistributed-load-testing-on-aws-headless.template%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Headless%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fembeddable-link%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Ffooter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fsimple-card%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Csimple-card%20variant%3D%22container%22%20guide%3D%22true%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3ELaunch%20the%20stack%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Launch%20a%20CloudFormation%20template%20directly%20in%20your%20AWS%20account.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cfooter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cembeddable-link%20href%3D%22https%3A%2F%2Fconsole.aws.amazon.com%2Fcloudformation%2Fhome%3Fregion%3Dus-east-1%23%2Fstacks%2Fnew%3F%26amp%3BtemplateURL%3Dhttps%3A%2F%2Fsolutions-reference.s3.amazonaws.com%2Fdistributed-load-testing-on-aws%2Flatest%2Fdistributed-load-testing-on-aws.template%26amp%3BredirectId%3DSolutionWeb%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Deploy%20Amazon%20CloudFront%20%2B%20S3%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fembeddable-link%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cembeddable-link%20href%3D%22https%3A%2F%2Fconsole.aws.amazon.com%2Fcloudformation%2Fhome%3Fregion%3Dus-east-1%23%2Fstacks%2Fnew%3F%26amp%3BtemplateURL%3Dhttps%3A%2F%2Fsolutions-reference.s3.amazonaws.com%2Fdistributed-load-testing-on-aws%2Flatest%2Fdistributed-load-testing-on-aws-alb-ecs.template%26amp%3BredirectId%3DSolutionWeb%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Deploy%20ALB%20%2B%20ECS%20on%20Fargate%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fembeddable-link%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cembeddable-link%20href%3D%22https%3A%2F%2Fconsole.aws.amazon.com%2Fcloudformation%2Fhome%3Fregion%3Dus-east-1%23%2Fstacks%2Fnew%3F%26amp%3BtemplateURL%3Dhttps%3A%2F%2Fsolutions-reference.s3.amazonaws.com%2Fdistributed-load-testing-on-aws%2Flatest%2Fdistributed-load-testing-on-aws-headless.template%26amp%3BredirectId%3DSolutionWeb%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Deploy%20Headless%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fembeddable-link%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Ffooter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fsimple-card%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Csimple-card%20variant%3D%22container%22%20guide%3D%22true%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3ESource%20code%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20The%20source%20code%20for%20this%20AWS%20Solution%20is%20available%20in%20GitHub.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cfooter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cembeddable-link%20href%3D%22https%3A%2F%2Fgithub.com%2Faws-solutions%2Fdistributed-load-testing-on-aws%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Go%20to%20GitHub%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fembeddable-link%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Ffooter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fsimple-card%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Csimple-card%20variant%3D%22container%22%20guide%3D%22true%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EImplementation%20guide%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Follow%20the%20implementation%20guide%20for%20step-by-step%20actions%20to%20deploy%20this%20AWS%20Solution.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cfooter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cembeddable-link%20href%3D%22%2Fsolutions%2Flatest%2Fdistributed-load-testing-on-aws%2Fdistributed-load-testing-on-aws.pdf%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Download%20guide%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fembeddable-link%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Ffooter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fsimple-card%3E%0A%20%20%20%20%20%20%20%20%20%3C%2Fcards%3E%0A%20%20%20%20%20%20%3C%2Fsection%3E%0A%20%20%20%20%20%20%3Csection%20id%3D%22related-content%22%3E%0A%20%20%20%20%20%20%20%20%20%3Ctitle%3ERelated%20content%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%3Ccards%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Clayout%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ccolumns%20default%3D%221%22%20s%3D%223%22%20xs%3D%222%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Flayout%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Csimple-card%20variant%3D%22container%22%20guide%3D%22true%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3ESolving%20with%20AWS%20Solutions%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20This%20video%20demonstrates%20how%20Distributed%20Load%20Testing%20on%20AWS%20enables%20automated%20application%20testing%20at%20scale%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20to%20identify%20and%20fix%20performance%20bottlenecks%20before%20production%20release.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cfooter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cembeddable-link%20href%3D%22https%3A%2F%2Fyoutu.be%2FY-2rk0sSyOM%3Fsi%3DmgVDyY0YjfwIIZ6m%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Watch%20the%20video%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fembeddable-link%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Ffooter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fsimple-card%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Csimple-card%20variant%3D%22container%22%20guide%3D%22true%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20Ensure%20Optimal%20Application%20Performance%20with%20Distributed%20Load%20Testing%20on%20AWS%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20This%20blog%20discusses%20Distributed%20Load%20Testing%20on%20AWS%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20for%20app%20scalability%2C%20automation%2C%20and%20bottleneck%20resolution%20before%20release.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cfooter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cembeddable-link%20href%3D%22https%3A%2F%2Faws.amazon.com%2Fblogs%2Farchitecture%2Fensure-optimal-application-performance-with-distributed-load-testing-on-aws%2F%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Read%20the%20blog%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fembeddable-link%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Ffooter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fsimple-card%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Csimple-card%20variant%3D%22container%22%20guide%3D%22true%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20Sony%20Music%20Solutions%20Inc.%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Learn%20how%20Sony%20Music%20Solutions%20Inc.%20reduced%20costs%20and%20improved%20performance%20testing%20speed%20using%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Distributed%20Load%20Testing%20on%20AWS.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cfooter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cembeddable-link%20href%3D%22https%3A%2F%2Faws.amazon.com%2Fsolutions%2Fcase-studies%2Fsony-music-solutions-inc-case-study%2F%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Read%20the%20case%20study%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fembeddable-link%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Ffooter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fsimple-card%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Csimple-card%20variant%3D%22container%22%20guide%3D%22true%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20Imagine%20Learning%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Education%20company%20Imagine%20Learning%20automated%20performance%20testing%20by%20implementing%20Distributed%20Load%20Testing%20on%20AWS%20in%20hours.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fabstract%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cfooter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cembeddable-link%20href%3D%22https%3A%2F%2Faws.amazon.com%2Fsolutions%2Fcase-studies%2Fimagine-learning%2F%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Read%20the%20case%20study%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fembeddable-link%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Ffooter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fsimple-card%3E%0A%20%20%20%20%20%20%20%20%20%3C%2Fcards%3E%0A%20%20%20%20%20%20%3C%2Fsection%3E%0A%20%20%20%20%20%20%3Csection%20id%3D%22customer-stories%22%3E%0A%20%20%20%20%20%20%20%20%20%3Ctitle%3ECustomer%20stories%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%3Ctablist%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctablistentry%20id%3D%22calabrio%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctabname%3ECalabrio%3C%2Ftabname%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctabcontent%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cem%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22At%20Calabrio%2C%20our%20mission%20is%20to%20help%20contact%20centers%20work%20smarter%2C%20faster%20and%20better.%20We%20needed%20to%20design%20a%20new%2C%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20high-performing%20feature%20for%20a%20major%20customer%20--%20fast.%20We%20used%20Distributed%20Load%20Testing%20on%20AWS%20to%20test%20our%20system%E2%80%99s%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20performance%20at%20scale%2C%20without%20the%20need%20for%20costly%20enterprise%20testing%20licenses%20or%20writing%20custom%20orchestration%20code%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20for%20open-source%20tools.%20With%20this%20AWS%20Solution%2C%20we%20designed%20and%20executed%20tests%20at%20six%20times%20the%20expected%20traffic%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20volume%20and%20launched%20the%20new%20feature%20successfully%20and%20ahead%20of%20schedule.%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fem%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cb%3EDaryl%20Robbins%2C%20Senior%20Director%2C%20Engineering%3C%2Fb%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Ftabcontent%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Ftablistentry%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctablistentry%20id%3D%22madeiramaderia%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctabname%3EMadeiraMadeira%3C%2Ftabname%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctabcontent%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cem%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22At%20MadeiraMadeira%2C%20ensuring%20the%20performance%20and%20scalability%20of%20our%20applications%20is%20essential%2C%20especially%20during%20high-traffic%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20periods%20like%20Black%20Friday.%20With%20Distributed%20Load%20Testing%20on%20AWS%2C%20we%20are%20able%20to%20simulate%20complex%20large-scale%20scenarios%20and%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20accelerate%20our%20non-functional%20validations.%20This%20AWS%20Solution%20removed%20technical%20barriers%20and%20helped%20us%20build%20greater%20confidence%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20in%20our%20releases%20while%20keeping%20customer%20experience%20a%20top%20priority.%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fem%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cb%3EMichel%20Augusto%2C%20Quality%20Assurance%20Specialist%3C%2Fb%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Ftabcontent%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Ftablistentry%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctablistentry%20id%3D%22arthurite-integrated%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctabname%3EArthurite%20Integrated%3C%2Ftabname%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ctabcontent%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cem%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Our%20team%20at%20Arthurite%20Integrated%20deployed%20an%20AI-powered%20chatbot%20and%20needed%20to%20ensure%20it%20could%20handle%20high-traffic%20volumes%20from%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20millions%20of%20users%2C%20especially%20during%20peak%20periods.%20Traditional%20manual%20testing%20couldn%27t%20simulate%20the%20real-world%20usage%20patterns%20we%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20expected%2C%20so%20we%20used%20Distributed%20Load%20Testing%20on%20AWS%20to%20validate%20the%20system%27s%20scalability%2C%20latency%20and%20fault%20tolerance%20under%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20realistic%20workloads.%20With%20this%20AWS%20Solution%20we%20identified%20latency%20bottlenecks%2C%20leading%20to%20optimizations%20that%20improved%20our%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20response%20time%20by%2060%25.%20Our%20error%20rates%20dropped%20by%2045%25%20and%20the%20system%27s%20throughput%20scaled%205x%20times%20higher%20under%20load.%20Auto-scaling%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20also%20became%203x%20more%20responsive%2C%20ensuring%20a%20seamless%20user%20experience%20even%20during%20usage%20spikes.%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fem%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cb%3ESomtochukwu%20Ezepue%2C%20Founder%2FCEO%3C%2Fb%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Ftabcontent%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Ftablistentry%3E%0A%20%20%20%20%20%20%20%20%20%3C%2Ftablist%3E%0A%20%20%20%20%20%20%3C%2Fsection%3E%0A%20%20%20%3C%2Fsections%3E%0A%20%20%20%3Cside-nav%3E%0A%20%20%20%20%20%20%3Cside-nav-sections%3E%0A%20%20%20%20%20%20%20%20%20%3Cside-nav-section%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3EAWS%20Support%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Clinks%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Csimple-link%20href%3D%22%2Fsolutions%2Flatest%2Fdistributed-load-testing-on-aws%2Fcontact-aws-support.html%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Get%20support%20for%20this%20AWS%20Solution%0A%20%20%20%20%20%20%20%20%20%20%3C%2Fsimple-link%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Flinks%3E%0A%20%20%20%20%20%20%20%20%20%3C%2Fside-nav-section%3E%0A%20%20%20%20%20%20%20%20%20%3Cside-nav-section%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctitle%3ERSS%20Feed%3C%2Ftitle%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Clinks%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Csimple-link%20href%3D%22https%3A%2F%2Fsolutions-reference.s3.us-east-1.amazonaws.com%2Fdistributed-load-testing-on-aws%2Flatest%2Frss.xml%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Subscribe%20now%20to%20get%20updates%20on%20the%20latest%20release.%0A%20%20%20%20%20%20%20%20%20%20%3C%2Fsimple-link%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Flinks%3E%0A%20%20%20%20%20%20%20%20%20%3C%2Fside-nav-section%3E%0A%20%20%20%20%20%20%3C%2Fside-nav-sections%3E%0A%20%20%20%3C%2Fside-nav%3E%0A%3C%2Flanding-page%3E%0A" />
+    <div class="awsdocs-container">
+    <div style="display:none;">
+        <header class="awsdocs-page-header">
+            <h1 class="awsdocs-page-title">Distributed Load Testing on AWS</h1>
+            <div class="awsdocs-page-abstract">Automate performance testing at scale for better reliability and efficiency
+  </div>
+            <div class="awsdocs-header-metadata">
+                <h3 class="awsdocs-metadata-title">About this deployment</h3>
+                <dl class="awsdocs-metadata-list">
+                    <dt class="awsdocs-metadata-key">Version</dt>
+                    <dd class="awsdocs-metadata-value">4.1.5</dd>
+                    <dt class="awsdocs-metadata-key">Released</dt>
+                    <dd class="awsdocs-metadata-value">07/2026</dd>
+                    <dt class="awsdocs-metadata-key">Est. deployment time</dt>
+                    <dd class="awsdocs-metadata-value">15 mins</dd>
+                    <dt class="awsdocs-metadata-key">Estimated cost</dt>
+                    <dd class="awsdocs-metadata-value">
+                                       <a href="/solutions/latest/distributed-load-testing-on-aws/cost.html" class="awsdocs-link">
+            See details
+          </a>
+            
+                    </dd>
+                    <dt class="awsdocs-metadata-key">Implementation guide</dt>
+                    <dd class="awsdocs-metadata-value">
+                                       <a href="/solutions/latest/distributed-load-testing-on-aws/solution-overview.html" class="awsdocs-link">
+            View guide
+          </a>
+            
+                    </dd>
+                </dl>
+            </div>
+            <div class="awsdocs-header-actions">
+                <a href="https://us-east-1.console.aws.amazon.com/launchwizard/home?redirectId=SolutionWeb&amp;region=us-east-1#/deployment/create/SO0062" class="awsdocs-button" data-button-type="primary">
+      Deploy now
+    </a><a href="https://app.storylane.io/share/ex5incxsdlaw" class="awsdocs-button" data-button-type="normal">
+      View demo
+    </a>
+            </div>
+        </header>
+        <main class="awsdocs-main">
+            <section class="awsdocs-section" aria-labelledby="overview">
+                <h2 class="awsdocs-section-title" id="overview">Overview</h2>
+                <div class="awsdocs-abstract">
+                                
+                    <p>
+            Simulate hundreds to millions of concurrent users against any endpoint, in any AWS Region, without provisioning a single server.
+            Distributed Load Testing on AWS is an open-source solution that automates performance testing at scale, demonstrating how
+            systems behave under different load conditions and helping identify potential performance issues throughout their lifecycle. The solution
+            automatically launches and manages distributed test runners within and across AWS Regions, providing insights into the scalability and
+            reliability of your Amazon EC2 instances, Amazon ECS or Amazon EKS clusters, AWS Lambda functions,
+            Amazon RDS databases, and Amazon CloudFront distributions.
+          </p>
+                                
+                    <p>
+            This solution supports JMeter, k6, and Locust testing frameworks, single HTTP endpoint tests, and provides comprehensive analytics
+            capabilities. Set test baselines to compare results throughout your application lifecycle and deploy the optional MCP server to build
+            AI-powered analytics. Streamline test execution, analyze regression over time, and gain deeper visibility into system behavior.
+          </p>
+                             
+                </div>
+            </section>
+            <section class="awsdocs-section" aria-labelledby="benefits">
+                <h2 class="awsdocs-section-title" id="benefits">Benefits</h2>
+                <div class="awsdocs-collapsible" data-component="Collapsible" data-expanded="true" data-variant="container">
+                    <details id="account-global-users" open="open">
+                        <summary class="awsdocs-collapsible-title">Distribute load across regions</summary>
+                        <div class="awsdocs-collapsible-content">
+                            <div class="awsdocs-cards" data-component="Grid" data-grid-definition="[{&quot;colspan&quot;:{&quot;xxs&quot;:12,&quot;m&quot;:12}}]">
+                                <article class="awsdocs-card">
+                                    <div class="awsdocs-abstract">
+                                                             
+                                        <p>
+                Optimize your application performance by simulating real-world traffic from multiple AWS Regions to assess how your application behaves under diverse geographic loads.
+              </p>
+                                                          
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+                <div class="awsdocs-collapsible" data-component="Collapsible" data-expanded="false" data-variant="container">
+                    <details id="automate-load-testing">
+                        <summary class="awsdocs-collapsible-title">Quickly analyze test results</summary>
+                        <div class="awsdocs-collapsible-content">
+                            <div class="awsdocs-cards" data-component="Grid" data-grid-definition="[{&quot;colspan&quot;:{&quot;xxs&quot;:12,&quot;m&quot;:12}}]">
+                                <article class="awsdocs-card">
+                                    <div class="awsdocs-abstract">
+                                                             
+                                        <p>
+                Easily access test run and results data through the dashboard that supports downloadable, tabular views 
+                as well as access to raw performance metrics, error summaries, and latency data for better analysis and reporting.
+              </p>
+                                                          
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+                <div class="awsdocs-collapsible" data-component="Collapsible" data-expanded="false" data-variant="container">
+                    <details id="adapt-tools">
+                        <summary class="awsdocs-collapsible-title">Automate insights with agentic AI</summary>
+                        <div class="awsdocs-collapsible-content">
+                            <div class="awsdocs-cards" data-component="Grid" data-grid-definition="[{&quot;colspan&quot;:{&quot;xxs&quot;:12,&quot;m&quot;:12}}]">
+                                <article class="awsdocs-card">
+                                    <div class="awsdocs-abstract">
+                                                             
+                                        <p>
+                Deploy the optional MCP server to connect DLT with agentic AI workflows. Automate performance analysis, compare test results against
+                observability metrics and application changes, and accelerate root cause identification without manual investigation.
+              </p>
+                                                          
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+                <div class="awsdocs-collapsible" data-component="Collapsible" data-expanded="false" data-variant="container">
+                    <details id="flexible-hosting">
+                        <summary class="awsdocs-collapsible-title">Deploy behind any network boundary</summary>
+                        <div class="awsdocs-collapsible-content">
+                            <div class="awsdocs-cards" data-component="Grid" data-grid-definition="[{&quot;colspan&quot;:{&quot;xxs&quot;:12,&quot;m&quot;:12}}]">
+                                <article class="awsdocs-card">
+                                    <div class="awsdocs-abstract">
+                                                             
+                                        <p>
+                Choose from three console hosting options: Amazon CloudFront with Amazon Simple Storage Service for public delivery, Application Load Balancer
+                with Amazon Elastic Container Service on AWS Fargate for restricted networks, or a headless backend-only deployment for self-hosting
+                behind your corporate network.
+              </p>
+                                                          
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+                <div class="awsdocs-collapsible" data-component="Collapsible" data-expanded="false" data-variant="container">
+                    <details id="optimize-costs">
+                        <summary class="awsdocs-collapsible-title">Optimize resource costs</summary>
+                        <div class="awsdocs-collapsible-content">
+                            <div class="awsdocs-cards" data-component="Grid" data-grid-definition="[{&quot;colspan&quot;:{&quot;xxs&quot;:12,&quot;m&quot;:12}}]">
+                                <article class="awsdocs-card">
+                                    <div class="awsdocs-abstract">
+                                                             
+                                        <p>
+                Right-size your infrastructure by gaining accurate insights into how your applications perform under
+                varying load conditions, resulting in cost-effective resource allocation.
+              </p>
+                                                          
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </section>
+            <section class="awsdocs-section" aria-labelledby="how-it-works">
+                <h2 class="awsdocs-section-title" id="how-it-works">How it works</h2>
+                <div class="awsdocs-abstract">
+                                
+                    <p>
+            Choose from three web console hosting options to match your network and compliance requirements. The default uses Amazon CloudFront with
+            Amazon Simple Storage Service for fast public delivery. For environments that restrict public Amazon CloudFront distributions, deploy with
+            Application Load Balancer and Amazon Elastic Container Service on AWS Fargate. For complete network isolation, use the headless option
+            that deploys the backend only and lets you host the console on your own web server. All options share the same backend and
+            Amazon Cognito authentication.
+          </p>
+                                
+                    <p>
+            You can automatically deploy this architecture using the implementation guide and the accompanying AWS CloudFormation template.
+          </p>
+                                <a href="/solutions/latest/distributed-load-testing-on-aws/solution-overview.html" class="awsdocs-link">
+            View implementation guide
+          </a>
+         
+                </div>
+                            <img class="awsdocs-image" alt="Distributed Load Testing Architecture" src="/images/solutions/distributed-load-testing-on-aws/images/architecture-diagram.png" width="400" loading="lazy" data-magnifier="true">
+            
+               
+                  Step 1
+                  
+                <div class="awsdocs-description">
+                                         
+                    <p>
+                  (CloudFront + S3 hosting deployment option) The Console User accesses the web console through Amazon CloudFront, which serves the AWS Amplify application hosted in an Amazon Simple Storage Service (Amazon S3) bucket.
+                </p>
+                                      
+                </div>
+                               
+               
+                  Step 2
+                  
+                <div class="awsdocs-description">
+                                         
+                    <p>
+                  (ALB + ECS Fargate hosting deployment option) The Console User accesses the web console through an Application Load Balancer, which routes traffic to the AWS Amplify application running on Amazon Elastic Container Service (Amazon ECS) on AWS Fargate inside an Amazon Virtual Private Cloud (Amazon VPC).
+                </p>
+                                      
+                </div>
+                               
+               
+                  Step 3
+                  
+                <div class="awsdocs-description">
+                                         
+                    <p>
+                  (Headless deployment option) No public front end is deployed. The solution provides the web console as a downloadable ZIP in a private Amazon S3 bucket. The Console User can access the console from a self-hosted web server.
+                </p>
+                                      
+                </div>
+                               
+               
+                  Step 4
+                  
+                <div class="awsdocs-description">
+                                         
+                    <p>
+                  During initial configuration, the solution creates a default administrator user in the Amazon Cognito user pool and sends an account creation email to the email address you provide. The Cognito user pool manages user access to the web console, the REST API, the CLI, and the MCP Server.
+                </p>
+                                      
+                </div>
+                               
+               
+                  Step 5
+                  
+                <div class="awsdocs-description">
+                                         
+                    <p>
+                  Amazon API Gateway invokes AWS Lambda microservices that provide the business logic to manage test data and run the tests.
+                </p>
+                                      
+                </div>
+                               
+               
+                  Step 6
+                  
+                <div class="awsdocs-description">
+                                         
+                    <p>
+                  The microservices interact with Amazon S3, Amazon DynamoDB, and Amazon EventBridge to store test scenario details and manage test schedules. When you schedule a test to run at a future time or on a recurring interval, the microservices create an EventBridge Scheduler schedule that invokes the microservice at the scheduled time.
+                </p>
+                                      
+                </div>
+                               
+               
+                  Step 7
+                  
+                <div class="awsdocs-description">
+                                         
+                    <p>
+                  To run a test, the microservices invoke AWS Step Functions, which orchestrates the test execution.
+                </p>
+                                      
+                </div>
+                               
+               
+                  Step 8
+                  
+                <div class="awsdocs-description">
+                                         
+                    <p>
+                  Amazon EventBridge rules route Amazon ECS task and Step Functions failure events to a failure handler Lambda function.
+                </p>
+                                      
+                </div>
+                               
+               
+                  Step 9
+                  
+                <div class="awsdocs-description">
+                                         
+                    <p>
+                  Step Functions launches Amazon Elastic Container Service (Amazon ECS) tasks on AWS Fargate in each AWS Region you selected.
+                </p>
+                                      
+                </div>
+                               
+               
+                  Step 10
+                  
+                <div class="awsdocs-description">
+                                         
+                    <p>
+                  Each task runs within an Amazon Virtual Private Cloud (Amazon VPC) in the selected Region.
+                </p>
+                                      
+                </div>
+                               
+               
+                  Step 11
+                  
+                <div class="awsdocs-description">
+                                         
+                    <p>
+                                          The load testing container uses an Amazon Linux 2023 base image with the <a href="https://gettaurus.org/" class="awsdocs-link" rel="noopener noreferrer" target="_blank">Taurus
+                            <awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon>
+                                                    </a> test automation framework installed. Taurus executes your JMeter, k6, Locust, or Single HTTP Endpoint test. The container images are hosted by AWS in an Amazon Elastic Container Registry (Amazon ECR) public repository.
+                
+                    </p>
+                                      
+                </div>
+                               
+               
+                  Step 12
+                  
+                <div class="awsdocs-description">
+                                         
+                    <p>
+                  Each Fargate task writes its per-Region test results to Amazon S3 and emits logs to Amazon CloudWatch. When all Regions complete, the microservices aggregate the results in DynamoDB.
+                </p>
+                                      
+                </div>
+                               
+               
+                  Step 13
+                  
+                <div class="awsdocs-description">
+                                         
+                    <p>
+                  If you enable the live data option, a Lambda function receives CloudWatch logs from Fargate tasks during the test.
+                </p>
+                                      
+                </div>
+                               
+               
+                  Step 14
+                  
+                <div class="awsdocs-description">
+                                         
+                    <p>
+                  The Lambda function publishes the logs to a topic in AWS IoT Core in the Region where the main stack is deployed. The web console subscribes to the topic to display real-time metrics while the test runs.
+                </p>
+                                      
+                </div>
+                               
+               
+                  Step 15
+                  
+                <div class="awsdocs-description">
+                                         
+                    <p>
+                  (Optional CLI access) Users can install the DLT command-line interface (CLI) locally to interact with the solution from their terminal. The CLI authenticates through Cognito and calls the REST API directly, enabling scripted automation and CI/CD integration.
+                </p>
+                                      
+                </div>
+                               
+               
+                  NOTE
+                  
+                <div class="awsdocs-description">
+                                         
+                    <p>
+                  The following steps describe the optional MCP Server integration for AI-assisted load testing analysis. This component is only deployed if you select the MCP Server option during solution deployment.
+                </p>
+                                      
+                </div>
+                               
+               
+                  Step 16
+                  
+                <div class="awsdocs-description">
+                                         
+                    <p>
+                  An MCP client (AI development tool) connects to the Amazon Bedrock AgentCore Gateway endpoint to access the Distributed Load Testing solution's data through the Model Context Protocol. AgentCore Gateway validates the user's Cognito authentication token to ensure authorized access to the MCP Server.
+                </p>
+                                      
+                </div>
+                               
+               
+                  Step 17
+                  
+                <div class="awsdocs-description">
+                                         
+                    <p>
+                  Upon successful authentication, AgentCore Gateway forwards the MCP tool request to the DLT MCP Server Lambda function.
+                </p>
+                                      
+                </div>
+                               
+               
+                  Step 18
+                  
+                <div class="awsdocs-description">
+                                         
+                    <p>
+                  The Lambda function processes the request and queries the appropriate AWS resources (DynamoDB tables, S3 buckets, or CloudWatch logs) to retrieve the requested load testing data. It then returns the structured data to AgentCore Gateway, which sends it back to the MCP client for AI-assisted analysis and insights.
+                </p>
+                                      
+                </div>
+                               
+            
+         
+            </section>
+            <section class="awsdocs-section" aria-labelledby="deploy">
+                <h2 class="awsdocs-section-title" id="deploy">Deploy with confidence</h2>
+                <div class="awsdocs-abstract">
+                                
+                    <p>
+            Everything you need to launch this AWS Solution in your account is right here.
+          </p>
+                             
+                </div>
+                <div class="awsdocs-cards" data-component="Grid" data-grid-definition="[{&quot;colspan&quot;:{&quot;xxs&quot;:6,&quot;m&quot;:4}}]">
+                    <article class="awsdocs-card" data-variant="container">
+                        <h3 class="awsdocs-card-title">We'll walk you through it</h3>
+                        <div class="awsdocs-abstract">
+                                              
+                            <p>
+                Get started fast. Read the implementation guide for deployment steps, architecture details, cost
+                information, and customization options.
+              </p>
+                                           
+                        </div>
+                        <div class="awsdocs-card-footer">
+                                              <a href="/solutions/latest/distributed-load-testing-on-aws/solution-overview.html" class="awsdocs-link">
+                Open guide
+              </a>
+               
+                        </div>
+                    </article>
+                    <article class="awsdocs-card" data-variant="container">
+                        <h3 class="awsdocs-card-title">Let's make it happen</h3>
+                        <div class="awsdocs-abstract">
+                                              
+                            <p>
+                Ready to deploy? AWS Launch Wizard walks you through setup in the AWS Console, where you can choose from three hosting
+                templates to match your network requirements. You'll be prompted to access your AWS account if you haven't yet logged in.
+              </p>
+                                           
+                        </div>
+                        <div class="awsdocs-card-footer">
+                                              <a href="https://us-east-1.console.aws.amazon.com/launchwizard/home?redirectId=SolutionWeb&amp;region=us-east-1#/deployment/create/SO0062" class="awsdocs-link">
+                AWS Launch Wizard
+              </a>
+               
+                        </div>
+                    </article>
+                    <article class="awsdocs-card" data-variant="container">
+                        <h3 class="awsdocs-card-title">Prepare for high-traffic events with confidence</h3>
+                        <div class="awsdocs-abstract">
+                                              
+                            <p>
+                AWS Countdown Premium Short Term Engagements for Distributed Load Testing helps you identify bottlenecks, scalability limitations, and infrastructure constraints before they impact your business.
+              </p>
+                                           
+                        </div>
+                        <div class="awsdocs-card-footer">
+                                              <a href="https://aws.amazon.com/premiumsupport/aws-countdown/boost/" class="awsdocs-link">
+                Sign up now
+              </a>
+               
+                        </div>
+                    </article>
+                </div>
+            </section>
+            <section class="awsdocs-section" aria-labelledby="deployment-tools">
+                <h2 class="awsdocs-section-title" id="deployment-tools">Deployment tools</h2>
+                <div class="awsdocs-abstract">
+                                
+                    <p>Follow these links for direct access to the artifacts for this AWS Solution.</p>
+                             
+                </div>
+                <div class="awsdocs-cards" data-component="Grid" data-grid-definition="[{&quot;colspan&quot;:{&quot;xxs&quot;:6,&quot;m&quot;:4}}]">
+                    <article class="awsdocs-card" data-variant="container">
+                        <h3 class="awsdocs-card-title">CloudFormation templates</h3>
+                        <div class="awsdocs-abstract">
+                                              
+                            <p>
+                Download the CloudFormation template for your preferred hosting option.
+              </p>
+                                           
+                        </div>
+                        <div class="awsdocs-card-footer">
+                                              <a href="https://solutions-reference.s3.amazonaws.com/distributed-load-testing-on-aws/latest/distributed-load-testing-on-aws.template" class="awsdocs-link" rel="noopener noreferrer" target="_blank">
+                Amazon CloudFront + S3
+              </a>
+                  <a href="https://solutions-reference.s3.amazonaws.com/distributed-load-testing-on-aws/latest/distributed-load-testing-on-aws-alb-ecs.template" class="awsdocs-link" rel="noopener noreferrer" target="_blank">
+                ALB + ECS on Fargate
+              </a>
+                  <a href="https://solutions-reference.s3.amazonaws.com/distributed-load-testing-on-aws/latest/distributed-load-testing-on-aws-headless.template" class="awsdocs-link" rel="noopener noreferrer" target="_blank">
+                Headless
+              </a>
+               
+                        </div>
+                    </article>
+                    <article class="awsdocs-card" data-variant="container">
+                        <h3 class="awsdocs-card-title">Launch the stack</h3>
+                        <div class="awsdocs-abstract">
+                                              
+                            <p>
+                Launch a CloudFormation template directly in your AWS account.
+              </p>
+                                           
+                        </div>
+                        <div class="awsdocs-card-footer">
+                                              <a href="https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?&amp;templateURL=https://solutions-reference.s3.amazonaws.com/distributed-load-testing-on-aws/latest/distributed-load-testing-on-aws.template&amp;redirectId=SolutionWeb" class="awsdocs-link">
+                Deploy Amazon CloudFront + S3
+              </a>
+                  <a href="https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?&amp;templateURL=https://solutions-reference.s3.amazonaws.com/distributed-load-testing-on-aws/latest/distributed-load-testing-on-aws-alb-ecs.template&amp;redirectId=SolutionWeb" class="awsdocs-link">
+                Deploy ALB + ECS on Fargate
+              </a>
+                  <a href="https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?&amp;templateURL=https://solutions-reference.s3.amazonaws.com/distributed-load-testing-on-aws/latest/distributed-load-testing-on-aws-headless.template&amp;redirectId=SolutionWeb" class="awsdocs-link">
+                Deploy Headless
+              </a>
+               
+                        </div>
+                    </article>
+                    <article class="awsdocs-card" data-variant="container">
+                        <h3 class="awsdocs-card-title">Source code</h3>
+                        <div class="awsdocs-abstract">
+                                              
+                            <p>
+                The source code for this AWS Solution is available in GitHub.
+              </p>
+                                           
+                        </div>
+                        <div class="awsdocs-card-footer">
+                                              <a href="https://github.com/aws-solutions/distributed-load-testing-on-aws" class="awsdocs-link" rel="noopener noreferrer" target="_blank">
+                Go to GitHub
+              </a>
+               
+                        </div>
+                    </article>
+                    <article class="awsdocs-card" data-variant="container">
+                        <h3 class="awsdocs-card-title">Implementation guide</h3>
+                        <div class="awsdocs-abstract">
+                                              
+                            <p>
+                Follow the implementation guide for step-by-step actions to deploy this AWS Solution.
+              </p>
+                                           
+                        </div>
+                        <div class="awsdocs-card-footer">
+                                              <a href="/solutions/latest/distributed-load-testing-on-aws/distributed-load-testing-on-aws.pdf" class="awsdocs-link">
+                Download guide
+              </a>
+               
+                        </div>
+                    </article>
+                </div>
+            </section>
+            <section class="awsdocs-section" aria-labelledby="related-content">
+                <h2 class="awsdocs-section-title" id="related-content">Related content</h2>
+                <div class="awsdocs-cards" data-component="Grid" data-grid-definition="[{&quot;colspan&quot;:{&quot;xs&quot;:6,&quot;s&quot;:4,&quot;default&quot;:12}}]">
+                    <article class="awsdocs-card" data-variant="container">
+                        <h3 class="awsdocs-card-title">Solving with AWS Solutions</h3>
+                        <div class="awsdocs-abstract">
+                                              
+                            <p>
+                This video demonstrates how Distributed Load Testing on AWS enables automated application testing at scale 
+                to identify and fix performance bottlenecks before production release.
+              </p>
+                                           
+                        </div>
+                        <div class="awsdocs-card-footer">
+                                              <a href="https://youtu.be/Y-2rk0sSyOM?si=mgVDyY0YjfwIIZ6m" class="awsdocs-link" rel="noopener noreferrer" target="_blank">
+                Watch the video
+              </a>
+               
+                        </div>
+                    </article>
+                    <article class="awsdocs-card" data-variant="container">
+                        <h3 class="awsdocs-card-title">
+              Ensure Optimal Application Performance with Distributed Load Testing on AWS
+            </h3>
+                        <div class="awsdocs-abstract">
+                                              
+                            <p>
+                This blog discusses Distributed Load Testing on AWS
+                for app scalability, automation, and bottleneck resolution before release.
+              </p>
+                                           
+                        </div>
+                        <div class="awsdocs-card-footer">
+                                              <a href="https://aws.amazon.com/blogs/architecture/ensure-optimal-application-performance-with-distributed-load-testing-on-aws/" class="awsdocs-link">
+                Read the blog
+              </a>
+               
+                        </div>
+                    </article>
+                    <article class="awsdocs-card" data-variant="container">
+                        <h3 class="awsdocs-card-title">
+              Sony Music Solutions Inc.
+            </h3>
+                        <div class="awsdocs-abstract">
+                                              
+                            <p>
+                Learn how Sony Music Solutions Inc. reduced costs and improved performance testing speed using
+                Distributed Load Testing on AWS.
+              </p>
+                                           
+                        </div>
+                        <div class="awsdocs-card-footer">
+                                              <a href="https://aws.amazon.com/solutions/case-studies/sony-music-solutions-inc-case-study/" class="awsdocs-link">
+                Read the case study
+              </a>
+               
+                        </div>
+                    </article>
+                    <article class="awsdocs-card" data-variant="container">
+                        <h3 class="awsdocs-card-title">
+              Imagine Learning
+            </h3>
+                        <div class="awsdocs-abstract">
+                                              
+                            <p>
+                Education company Imagine Learning automated performance testing by implementing Distributed Load Testing on AWS in hours.
+              </p>
+                                           
+                        </div>
+                        <div class="awsdocs-card-footer">
+                                              <a href="https://aws.amazon.com/solutions/case-studies/imagine-learning/" class="awsdocs-link">
+                Read the case study
+              </a>
+               
+                        </div>
+                    </article>
+                </div>
+            </section>
+            <section class="awsdocs-section" aria-labelledby="customer-stories">
+                <h2 class="awsdocs-section-title" id="customer-stories">Customer stories</h2>
+                <div class="awsdocs-tabs" data-component="Tabs">
+                    <div class="awsdocs-tab-item" data-tab-id="calabrio">
+                        <div class="awsdocs-tab-label">Calabrio</div>
+                        <div class="awsdocs-tab-content">
+                                              
+                            <p>
+                                                     <em>
+                "At Calabrio, our mission is to help contact centers work smarter, faster and better. We needed to design a new, 
+                high-performing feature for a major customer -- fast. We used Distributed Load Testing on AWS to test our system&rsquo;s 
+                performance at scale, without the need for costly enterprise testing licenses or writing custom orchestration code 
+                for open-source tools. With this AWS Solution, we designed and executed tests at six times the expected traffic 
+                volume and launched the new feature successfully and ahead of schedule."
+              </em>
+                  
+                            </p>
+                                              
+                            <p>
+                                                     <b>Daryl Robbins, Senior Director, Engineering</b>
+                  
+                            </p>
+                                           
+                        </div>
+                    </div>
+                    <div class="awsdocs-tab-item" data-tab-id="madeiramaderia">
+                        <div class="awsdocs-tab-label">MadeiraMadeira</div>
+                        <div class="awsdocs-tab-content">
+                                              
+                            <p>
+                                                     <em>
+                "At MadeiraMadeira, ensuring the performance and scalability of our applications is essential, especially during high-traffic 
+                periods like Black Friday. With Distributed Load Testing on AWS, we are able to simulate complex large-scale scenarios and 
+                accelerate our non-functional validations. This AWS Solution removed technical barriers and helped us build greater confidence 
+                in our releases while keeping customer experience a top priority."
+              </em>
+                  
+                            </p>
+                                              
+                            <p>
+                                                     <b>Michel Augusto, Quality Assurance Specialist</b>
+                  
+                            </p>
+                                           
+                        </div>
+                    </div>
+                    <div class="awsdocs-tab-item" data-tab-id="arthurite-integrated">
+                        <div class="awsdocs-tab-label">Arthurite Integrated</div>
+                        <div class="awsdocs-tab-content">
+                                              
+                            <p>
+                                                     <em>
+                "Our team at Arthurite Integrated deployed an AI-powered chatbot and needed to ensure it could handle high-traffic volumes from 
+                millions of users, especially during peak periods. Traditional manual testing couldn't simulate the real-world usage patterns we 
+                expected, so we used Distributed Load Testing on AWS to validate the system's scalability, latency and fault tolerance under 
+                realistic workloads. With this AWS Solution we identified latency bottlenecks, leading to optimizations that improved our 
+                response time by 60%. Our error rates dropped by 45% and the system's throughput scaled 5x times higher under load. Auto-scaling 
+                also became 3x more responsive, ensuring a seamless user experience even during usage spikes."
+              </em>
+                  
+                            </p>
+                                              
+                            <p>
+                                                     <b>Somtochukwu Ezepue, Founder/CEO</b>
+                  
+                            </p>
+                                           
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <aside class="awsdocs-side-nav">
+            <nav class="awsdocs-side-nav-section">
+                <h2 class="awsdocs-side-nav-title">AWS Support</h2>
+                <ul class="awsdocs-side-nav-list">
+                    <li>
+                        <a href="/solutions/latest/distributed-load-testing-on-aws/contact-aws-support.html" class="awsdocs-link">
+            Get support for this AWS Solution
+          </a>
+                    </li>
+                </ul>
+            </nav>
+            <nav class="awsdocs-side-nav-section">
+                <h2 class="awsdocs-side-nav-title">RSS Feed</h2>
+                <ul class="awsdocs-side-nav-list">
+                    <li>
+                        <a href="https://solutions-reference.s3.us-east-1.amazonaws.com/distributed-load-testing-on-aws/latest/rss.xml" class="awsdocs-link">
+            Subscribe now to get updates on the latest release.
+          </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+    </div>
+</div>
+
+  </body>
+</html>
