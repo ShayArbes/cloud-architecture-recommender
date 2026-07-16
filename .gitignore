@@ -78,3 +78,8 @@ Desktop.ini
 *.log
 logs/
 tmp/
+
+# ============================================================
+# Local working files (not part of the deliverable)
+# ============================================================
+home assignment aws.pdf
