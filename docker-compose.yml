@@ -1,0 +1,23 @@
+# Sprint 0 (S0.4): MongoDB only — the backend and frontend run locally against it.
+# The backend and frontend services are added in Sprint 5 (S5.2) once their
+# Dockerfiles exist.
+services:
+  mongo:
+    image: mongo:7
+    container_name: cloud-arch-mongo
+    ports:
+      # Host port is configurable so the container can coexist with a
+      # locally installed MongoDB (set MONGO_HOST_PORT in .env).
+      - '${MONGO_HOST_PORT:-27017}:27017'
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ['CMD', 'mongosh', '--quiet', '--eval', "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+
+volumes:
+  mongo_data:

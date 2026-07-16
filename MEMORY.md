@@ -41,7 +41,20 @@
 
 ## 2. Resolved Bugs & Pitfalls
 
-*(No entries yet — no application code exists. First agent to fix a non-trivial bug adds it here.)*
+### 2026-07-17 — Motor's `AsyncIOMotorClient` is generic; mypy --strict rejects bare usage (Backend)
+**Context:** S0.2 — `mypy --strict` failed with `type-arg` / `no-any-return` errors on every bare `AsyncIOMotorClient` annotation, and `request.app.state.mongo_client` is typed `Any`.
+**Decision / Fix:** Single alias `MongoClient = AsyncIOMotorClient[dict[str, Any]]` in `app/db/client.py`; all layers import it. `get_mongo_client` casts `app.state.mongo_client` to it.
+**Why / Lesson:** Always annotate Motor clients/collections with the `dict[str, Any]` document type parameter via the shared alias — never bare. Repositories (S1.4+) must reuse this alias, not redefine it.
+
+### 2026-07-17 — Vite `react-ts` template no longer matches project rules out of the box (Frontend)
+**Context:** S0.3 — current `npm create vite` (Vite 8) ships **oxlint** instead of ESLint and omits `"strict"` from `tsconfig.app.json`.
+**Decision / Fix:** Replaced oxlint with ESLint (typescript-eslint `strictTypeChecked` + react-hooks + prettier config) and added `strict` + `noUncheckedIndexedAccess` to `tsconfig.app.json`. `npm run lint` runs both eslint and `prettier --check`.
+**Why / Lesson:** Do not assume the scaffold satisfies CLAUDE.md §2/§3.4 — verify lint/strictness config after any template upgrade.
+
+### 2026-07-17 — Port 27017 on this dev machine is taken by a local MongoDB Windows service (DevOps)
+**Context:** S0.4 — the compose mongo container could not bind 27017 because a locally installed MongoDB service already listens there; a backend "connected" health check may be talking to the *local* service, not the container.
+**Decision / Fix:** Host port is configurable: `${MONGO_HOST_PORT:-27017}` in `docker-compose.yml` (documented in `.env.example`). Verification used port 27018 to guarantee the container was the responder.
+**Why / Lesson:** When verifying Mongo connectivity on this machine, use a non-default host port (e.g. 27018) or you cannot tell the container apart from the local service.
 
 ## 3. Workflow Lessons
 
