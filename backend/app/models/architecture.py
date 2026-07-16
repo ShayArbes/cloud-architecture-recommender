@@ -1,5 +1,7 @@
 """Domain models for parsed AWS reference architectures (CLAUDE.md §5.1)."""
 
+from datetime import datetime
+
 from pydantic import BaseModel, Field
 
 from app.models.enums import (
@@ -56,3 +58,14 @@ class ParsedArchitecture(BaseModel):
     diagram_url: str | None
     tags: list[str]
     parser_version: str
+
+
+class Architecture(ParsedArchitecture):
+    """A persisted architecture document (CLAUDE.md §5.1).
+
+    Adds the scrape/parse timestamps to the parsed payload; ``slug`` and
+    ``source_url`` are the stable identifiers, so no Mongo ``_id`` is exposed.
+    """
+
+    scraped_at: datetime
+    parsed_at: datetime

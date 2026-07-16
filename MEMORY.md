@@ -56,6 +56,11 @@
 **Decision / Fix:** Host port is configurable: `${MONGO_HOST_PORT:-27017}` in `docker-compose.yml` (documented in `.env.example`). Verification used port 27018 to guarantee the container was the responder.
 **Why / Lesson:** When verifying Mongo connectivity on this machine, use a non-default host port (e.g. 27018) or you cannot tell the container apart from the local service.
 
+### 2026-07-17 — BSON truncates datetimes to milliseconds; equality round-trips need normalization (Data)
+**Context:** S1.4 — a repository round-trip test failed because `datetime.now(UTC)` carries microseconds while MongoDB/BSON stores milliseconds.
+**Decision / Fix:** Tests that compare stored-vs-original models truncate to millisecond precision. The Motor client is created with `tz_aware=True` so all timestamps stay UTC-aware end to end.
+**Why / Lesson:** Never assert exact equality on datetimes that pass through Mongo without millisecond normalization; prefer field comparisons or truncation in test factories.
+
 ## 3. Workflow Lessons
 
 ### 2026-07-16 — Update `todo.md` in the same commit that completes a story (Architect)
