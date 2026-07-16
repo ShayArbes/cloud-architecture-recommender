@@ -27,6 +27,13 @@ class Settings(BaseSettings):
     # Comma-separated list of CORS origins (parsed via `cors_origins_list`).
     cors_origins: str = "http://localhost:5173,http://localhost:3000"
 
+    # Scraper politeness knobs (retry policy lives in core/constants.py)
+    scraper_max_concurrency: int = 3
+    scraper_timeout_seconds: float = 15.0
+    scraper_user_agent: str = (
+        "CloudArchRecommenderBot/0.1 (+https://github.com/ShayArbes/cloud-architecture-recommender)"
+    )
+
     @property
     def cors_origins_list(self) -> list[str]:
         """Return the configured CORS origins as a cleaned list."""

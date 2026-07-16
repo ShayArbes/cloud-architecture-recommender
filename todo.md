@@ -110,7 +110,7 @@ progress checklist (§2 below) updated.
 - [x] S0.4 Compose skeleton (MongoDB service, backend connectivity)
 
 ### Sprint 1 — Scraping & Parsing
-- [ ] S1.1 Async fetcher (retries, backoff, rate limiting)
+- [x] S1.1 Async fetcher (retries, backoff, rate limiting)
 - [ ] S1.2 Rule-based parser (+ HTML fixtures & tests)
 - [ ] S1.3 Characteristics extraction (heuristics; optional LLM parser; no-key fallback)
 - [ ] S1.4 Idempotent persistence + scrape job records + indexes
