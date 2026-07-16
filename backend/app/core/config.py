@@ -27,6 +27,9 @@ class Settings(BaseSettings):
     # Comma-separated list of CORS origins (parsed via `cors_origins_list`).
     cors_origins: str = "http://localhost:5173,http://localhost:3000"
 
+    # Optional Claude API key for the LLM parser; empty = rule-based fallback.
+    anthropic_api_key: str = ""
+
     # Scraper politeness knobs (retry policy lives in core/constants.py)
     scraper_max_concurrency: int = 3
     scraper_timeout_seconds: float = 15.0

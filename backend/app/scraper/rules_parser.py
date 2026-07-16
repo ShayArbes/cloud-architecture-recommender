@@ -17,6 +17,7 @@ from bs4.element import Tag
 
 from app.core.errors import ScrapeError
 from app.models.architecture import AwsService, ParsedArchitecture
+from app.scraper.characteristics import extract_characteristics
 from app.scraper.service_catalog import CATEGORY_PURPOSES, SERVICE_CATALOG
 
 RULES_PARSER_VERSION = "rules-v1"
@@ -46,19 +47,23 @@ class RulesBasedParser:
 
     parser_version = RULES_PARSER_VERSION
 
-    def parse(self, raw_html: str, source_url: str) -> ParsedArchitecture:
-        """Extract a ``ParsedArchitecture`` from ``raw_html``."""
+    async def parse(self, raw_html: str, source_url: str) -> ParsedArchitecture:
+        """Extract a ``ParsedArchitecture`` from ``raw_html`` (no I/O performed)."""
         soup = BeautifulSoup(raw_html, "html.parser")
         title = self._extract_title(soup)
         if title is None:
             raise ScrapeError("Page has no usable title", details={"source_url": source_url})
         services = self._extract_services(raw_html)
+        description = self._extract_description(soup)
+        characteristics = extract_characteristics(title, description, services)
         return ParsedArchitecture(
             slug=_slugify(title),
             title=title,
             source_url=source_url,
-            description=self._extract_description(soup),
+            description=description,
+            use_cases=characteristics.use_cases,
             aws_services=services,
+            characteristics=characteristics,
             diagram_url=self._extract_diagram_url(soup),
             tags=[_service_tag(service.name) for service in services],
             parser_version=self.parser_version,

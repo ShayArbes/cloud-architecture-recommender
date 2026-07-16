@@ -11,11 +11,15 @@ from app.models.architecture import ParsedArchitecture
 
 
 class ArchitectureParser(Protocol):
-    """Extracts a structured architecture from one scraped page."""
+    """Extracts a structured architecture from one scraped page.
+
+    ``parse`` is async because implementations may call external services
+    (the Claude API); pure-rules implementations simply never await.
+    """
 
     parser_version: str
 
-    def parse(self, raw_html: str, source_url: str) -> ParsedArchitecture:
+    async def parse(self, raw_html: str, source_url: str) -> ParsedArchitecture:
         """Parse ``raw_html`` fetched from ``source_url``.
 
         Raises:
