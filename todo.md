@@ -124,8 +124,8 @@ progress checklist (§2 below) updated.
 ### Sprint 3 — Recommendation Engine
 - [x] S3.1 Request schema (9 enum fields, 422 handling)
 - [x] S3.2 Weighted scoring engine (+ unit tests)
-- [ ] S3.3 Explanation generation
-- [ ] S3.4 `POST /recommendations` endpoint
+- [x] S3.3 Explanation generation
+- [x] S3.4 `POST /recommendations` endpoint
 
 ### Sprint 4 — Frontend
 - [ ] S4.1 Typed API layer + React Query hooks

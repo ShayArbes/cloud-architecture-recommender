@@ -70,6 +70,13 @@ class MongoArchitectureRepository:
         document.pop("_id", None)
         return Architecture.model_validate(document)
 
+    async def list_all(self) -> list[Architecture]:
+        """Return every architecture in one query (recommendation candidate set)."""
+        return [
+            Architecture.model_validate({k: v for k, v in document.items() if k != "_id"})
+            async for document in self._collection.find({})
+        ]
+
     async def count(self) -> int:
         """Total number of stored architectures."""
         return await self._collection.count_documents({})
