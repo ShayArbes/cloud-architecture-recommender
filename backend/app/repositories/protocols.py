@@ -40,6 +40,14 @@ class ArchitectureReader(Protocol):
         """Fetch one architecture by its public slug, or ``None`` if unknown."""
         ...
 
+    async def list_all(self) -> list[Architecture]:
+        """Return every architecture in one query — the recommendation candidate set.
+
+        The inventory is bounded (reference architectures number in the
+        hundreds); scoring makes a single pass over this set (CLAUDE.md §3.6).
+        """
+        ...
+
 
 class ScrapeJobRecorder(Protocol):
     """Lifecycle recording for scrape job documents."""

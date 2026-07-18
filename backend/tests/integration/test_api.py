@@ -172,6 +172,45 @@ async def test_scrape_job_unknown_id_returns_404(api_client: httpx.AsyncClient) 
     assert response.json()["error"]["code"] == "SCRAPE_JOB_NOT_FOUND"
 
 
+async def test_recommendations_end_to_end(
+    api_client: httpx.AsyncClient, pipeline: ConfigurablePipeline
+) -> None:
+    """Scrape-seed the inventory, then rank it via POST /recommendations."""
+    result = PipelineResult(
+        parsed=[parsed("shop-b", UseCase.ECOMMERCE), parsed("web-a", UseCase.WEB_APPLICATION)],
+        pages_found=2,
+    )
+    await _run_scrape(api_client, pipeline, result)
+
+    payload = {
+        "use_case": "ecommerce",
+        "scale": "medium",
+        "traffic_pattern": "steady",
+        "latency_sensitivity": "medium",
+        "processing_style": "request_response",
+        "data_intensity": "medium",
+        "availability_requirement": "high",
+        "ops_preference": "managed_services",
+        "budget_sensitivity": "low",
+    }
+    response = await api_client.post("/api/v1/recommendations", json=payload)
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["total_candidates_evaluated"] == 2
+    # The ecommerce architecture ranks above the plain web app for this request.
+    assert body["recommendations"][0]["architecture"]["slug"] == "shop-b"
+    assert body["recommendations"][0]["explanation"]
+    assert len(body["recommendations"][0]["match_breakdown"]) == 9
+
+
+async def test_recommendations_invalid_payload_returns_422(api_client: httpx.AsyncClient) -> None:
+    response = await api_client.post("/api/v1/recommendations", json={"use_case": "ecommerce"})
+
+    assert response.status_code == 422
+    assert response.json()["error"]["code"] == "VALIDATION_ERROR"
+
+
 async def test_scrape_rejects_concurrent_job_with_409(
     api_client: httpx.AsyncClient, integration_db: MongoDatabase
 ) -> None:

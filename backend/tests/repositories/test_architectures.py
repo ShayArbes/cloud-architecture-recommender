@@ -182,3 +182,12 @@ async def test_list_page_filters_by_use_case_and_tag(mongo_database: MongoDataba
     by_tag, tag_total = await repository.list_page(limit=20, offset=0, tag="cloudfront")
     assert tag_total == 1
     assert [arch.slug for arch in by_tag] == ["web-c"]
+
+
+async def test_list_all_returns_every_candidate(mongo_database: MongoDatabase) -> None:
+    repository = MongoArchitectureRepository(mongo_database)
+    await _seed_three(repository)
+
+    everything = await repository.list_all()
+
+    assert {arch.slug for arch in everything} == {"web-a", "shop-b", "web-c"}

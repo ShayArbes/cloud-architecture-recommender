@@ -18,6 +18,7 @@ from app.repositories.protocols import (
 )
 from app.repositories.scrape_jobs import MongoScrapeJobRepository
 from app.scraper.pipeline import HttpScrapePipeline, ScrapePipeline
+from app.services.recommendation.service import RecommendationService
 from app.services.scrape import ScrapeService
 
 SettingsDep = Annotated[Settings, Depends(get_settings)]
@@ -68,3 +69,11 @@ def get_scrape_service(
 
 
 ScrapeServiceDep = Annotated[ScrapeService, Depends(get_scrape_service)]
+
+
+def get_recommendation_service(reader: ArchitectureReaderDep) -> RecommendationService:
+    """Assemble the recommendation service over the architecture reader."""
+    return RecommendationService(reader)
+
+
+RecommendationServiceDep = Annotated[RecommendationService, Depends(get_recommendation_service)]

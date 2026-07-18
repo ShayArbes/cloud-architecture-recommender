@@ -97,6 +97,9 @@ class FakeArchitectureReader:
     async def get_by_slug(self, slug: str) -> Architecture | None:
         return next((a for a in self._architectures if a.slug == slug), None)
 
+    async def list_all(self) -> list[Architecture]:
+        return list(self._architectures)
+
 
 @pytest.fixture
 def client_with(request: pytest.FixtureRequest) -> Iterator[TestClient]:
