@@ -116,7 +116,7 @@ progress checklist (§2 below) updated.
 - [x] S1.4 Idempotent persistence + scrape job records + indexes
 
 ### Sprint 2 — Backend API
-- [ ] S2.1 `GET /architectures` (pagination, filters)
+- [x] S2.1 `GET /architectures` (pagination, filters)
 - [ ] S2.2 `GET /architectures/{slug}`
 - [ ] S2.3 `POST /scrape` + job status endpoints
 - [ ] S2.4 API integration tests

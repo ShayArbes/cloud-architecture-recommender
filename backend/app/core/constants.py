@@ -16,3 +16,10 @@ AWS_DIRECTORY_API_URL = "https://aws.amazon.com/api/dirs/items/search"
 AWS_DIRECTORY_ID = "alias#architecture-center"
 AWS_DIRECTORY_LOCALE = "en_US"
 AWS_DIRECTORY_PAGE_SIZE = 100
+
+# --- API (CLAUDE.md §6) -----------------------------------------------------
+API_V1_PREFIX = "/api/v1"
+
+# List pagination (CLAUDE.md §3.6, §6)
+DEFAULT_PAGE_LIMIT = 20
+MAX_PAGE_LIMIT = 100

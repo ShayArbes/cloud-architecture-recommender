@@ -8,11 +8,12 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import get_settings
+from app.core.constants import API_V1_PREFIX
 from app.core.errors import register_exception_handlers
 from app.core.logging import configure_logging
 from app.db.client import create_client
 from app.db.indexes import ensure_indexes
-from app.routers import health
+from app.routers import architectures, health
 
 logger = logging.getLogger(__name__)
 
@@ -52,7 +53,10 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
     register_exception_handlers(app)
+    # /health stays at the root for the Docker healthcheck; the versioned API
+    # surface (CLAUDE.md §6) is mounted under /api/v1.
     app.include_router(health.router)
+    app.include_router(architectures.router, prefix=API_V1_PREFIX)
     return app
 
 
