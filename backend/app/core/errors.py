@@ -52,6 +52,13 @@ class ValidationError(AppError):
     status_code = 422
 
 
+class ConflictError(AppError):
+    """The request conflicts with current resource state (e.g. a running job)."""
+
+    code = "CONFLICT"
+    status_code = 409
+
+
 class ScrapeError(AppError):
     """A scraping/parsing operation failed."""
 

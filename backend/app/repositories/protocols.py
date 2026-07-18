@@ -65,3 +65,11 @@ class ScrapeJobRecorder(Protocol):
     async def get(self, job_id: str) -> ScrapeJob | None:
         """Fetch one job by id, or ``None`` if unknown."""
         ...
+
+    async def list_recent(self, limit: int) -> list[ScrapeJob]:
+        """Return the most recent jobs, newest first."""
+        ...
+
+    async def has_active_job(self) -> bool:
+        """Return whether a ``pending`` or ``running`` job already exists."""
+        ...

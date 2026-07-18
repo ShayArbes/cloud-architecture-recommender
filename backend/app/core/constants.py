@@ -23,3 +23,8 @@ API_V1_PREFIX = "/api/v1"
 # List pagination (CLAUDE.md §3.6, §6)
 DEFAULT_PAGE_LIMIT = 20
 MAX_PAGE_LIMIT = 100
+
+# Scrape trigger: pages per job and job-history page size
+DEFAULT_SCRAPE_LIMIT = 20
+MAX_SCRAPE_LIMIT = 100
+JOB_HISTORY_LIMIT = 20
