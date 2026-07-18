@@ -128,11 +128,11 @@ progress checklist (§2 below) updated.
 - [x] S3.4 `POST /recommendations` endpoint
 
 ### Sprint 4 — Frontend
-- [ ] S4.1 Typed API layer + React Query hooks
-- [ ] S4.2 Architecture list page
-- [ ] S4.3 Architecture detail view
-- [ ] S4.4 Scrape trigger + job status UI
-- [ ] S4.5 Recommendation form + results view
+- [x] S4.1 Typed API layer + React Query hooks
+- [x] S4.2 Architecture list page
+- [x] S4.3 Architecture detail view
+- [x] S4.4 Scrape trigger + job status UI
+- [x] S4.5 Recommendation form + results view
 
 ### Sprint 5 — DevOps & Polish
 - [ ] S5.1 Dockerfiles (backend, frontend)

@@ -1,5 +1,6 @@
 import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
 
+import { ArchitectureDetailPage } from './features/architectures/ArchitectureDetailPage';
 import { ArchitecturesPage } from './features/architectures/ArchitecturesPage';
 import { RecommendationsPage } from './features/recommendations/RecommendationsPage';
 import { ScrapingPage } from './features/scraping/ScrapingPage';
@@ -20,6 +21,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/architectures" replace />} />
           <Route path="/architectures" element={<ArchitecturesPage />} />
+          <Route path="/architectures/:slug" element={<ArchitectureDetailPage />} />
           <Route path="/recommendations" element={<RecommendationsPage />} />
           <Route path="/scraping" element={<ScrapingPage />} />
         </Routes>
