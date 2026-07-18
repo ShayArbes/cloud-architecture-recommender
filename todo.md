@@ -123,7 +123,7 @@ progress checklist (§2 below) updated.
 
 ### Sprint 3 — Recommendation Engine
 - [x] S3.1 Request schema (9 enum fields, 422 handling)
-- [ ] S3.2 Weighted scoring engine (+ unit tests)
+- [x] S3.2 Weighted scoring engine (+ unit tests)
 - [ ] S3.3 Explanation generation
 - [ ] S3.4 `POST /recommendations` endpoint
 
