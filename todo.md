@@ -119,7 +119,7 @@ progress checklist (§2 below) updated.
 - [x] S2.1 `GET /architectures` (pagination, filters)
 - [x] S2.2 `GET /architectures/{slug}`
 - [x] S2.3 `POST /scrape` + job status endpoints
-- [ ] S2.4 API integration tests
+- [x] S2.4 API integration tests
 
 ### Sprint 3 — Recommendation Engine
 - [ ] S3.1 Request schema (9 enum fields, 422 handling)
