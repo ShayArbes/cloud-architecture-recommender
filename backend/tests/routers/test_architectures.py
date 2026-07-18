@@ -185,3 +185,29 @@ def test_limit_over_max_returns_422(client_with: TestClient) -> None:
 
 def test_negative_offset_returns_422(client_with: TestClient) -> None:
     assert client_with.get("/api/v1/architectures?offset=-1").status_code == 422
+
+
+# --- GET /architectures/{slug} (S2.2) --------------------------------------
+
+
+def test_detail_returns_full_document(client_with: TestClient) -> None:
+    response = client_with.get("/api/v1/architectures/arch-0")
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["slug"] == "arch-0"
+    assert body["title"] == "Architecture 0"
+    # Detail exposes the heavy fields the summary omits.
+    assert body["aws_services"][0]["name"] == "AWS Lambda"
+    assert body["aws_services"][0]["category"] == "compute"
+    assert body["characteristics"]["ops_model"] == "managed_services"
+    assert set(body["use_cases"]) == {"web_application"}
+
+
+def test_detail_unknown_slug_returns_404_envelope(client_with: TestClient) -> None:
+    response = client_with.get("/api/v1/architectures/does-not-exist")
+
+    assert response.status_code == 404
+    error = response.json()["error"]
+    assert error["code"] == "ARCHITECTURE_NOT_FOUND"
+    assert error["details"] == {"slug": "does-not-exist"}

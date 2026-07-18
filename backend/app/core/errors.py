@@ -22,10 +22,20 @@ class AppError(Exception):
     code: str = "APP_ERROR"
     status_code: int = 500
 
-    def __init__(self, message: str, details: dict[str, Any] | None = None) -> None:
+    def __init__(
+        self,
+        message: str,
+        details: dict[str, Any] | None = None,
+        *,
+        code: str | None = None,
+    ) -> None:
         super().__init__(message)
         self.message = message
         self.details: dict[str, Any] = details or {}
+        # Callers may specialize the envelope code (e.g. ARCHITECTURE_NOT_FOUND)
+        # without needing a dedicated subclass per resource.
+        if code is not None:
+            self.code = code
 
 
 class NotFoundError(AppError):

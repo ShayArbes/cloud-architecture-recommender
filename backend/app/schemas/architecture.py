@@ -4,7 +4,11 @@ from datetime import datetime
 
 from pydantic import BaseModel
 
-from app.models.architecture import Architecture
+from app.models.architecture import (
+    Architecture,
+    ArchitectureCharacteristics,
+    AwsService,
+)
 from app.models.enums import UseCase
 
 
@@ -35,6 +39,28 @@ class ArchitectureSummary(BaseModel):
             scraped_at=architecture.scraped_at,
             parsed_at=architecture.parsed_at,
         )
+
+
+class ArchitectureDetail(BaseModel):
+    """Full architecture detail (CLAUDE.md §5.1) — everything the UI renders."""
+
+    slug: str
+    title: str
+    source_url: str
+    description: str
+    use_cases: list[UseCase]
+    aws_services: list[AwsService]
+    characteristics: ArchitectureCharacteristics
+    diagram_url: str | None
+    tags: list[str]
+    parser_version: str
+    scraped_at: datetime
+    parsed_at: datetime
+
+    @classmethod
+    def from_domain(cls, architecture: Architecture) -> "ArchitectureDetail":
+        """Map a domain model to its detail DTO."""
+        return cls.model_validate(architecture.model_dump())
 
 
 class PageMeta(BaseModel):
