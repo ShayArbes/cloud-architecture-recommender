@@ -118,7 +118,7 @@ progress checklist (§2 below) updated.
 ### Sprint 2 — Backend API
 - [x] S2.1 `GET /architectures` (pagination, filters)
 - [x] S2.2 `GET /architectures/{slug}`
-- [ ] S2.3 `POST /scrape` + job status endpoints
+- [x] S2.3 `POST /scrape` + job status endpoints
 - [ ] S2.4 API integration tests
 
 ### Sprint 3 — Recommendation Engine

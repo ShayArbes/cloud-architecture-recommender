@@ -11,7 +11,14 @@ from fastapi import Depends
 from app.core.config import Settings, get_settings
 from app.db.client import MongoClient, MongoDatabase, get_mongo_client
 from app.repositories.architectures import MongoArchitectureRepository
-from app.repositories.protocols import ArchitectureReader
+from app.repositories.protocols import (
+    ArchitectureReader,
+    ArchitectureWriter,
+    ScrapeJobRecorder,
+)
+from app.repositories.scrape_jobs import MongoScrapeJobRepository
+from app.scraper.pipeline import HttpScrapePipeline, ScrapePipeline
+from app.services.scrape import ScrapeService
 
 SettingsDep = Annotated[Settings, Depends(get_settings)]
 MongoClientDep = Annotated[MongoClient, Depends(get_mongo_client)]
@@ -30,4 +37,34 @@ def get_architecture_reader(database: DatabaseDep) -> ArchitectureReader:
     return MongoArchitectureRepository(database)
 
 
+def get_architecture_writer(database: DatabaseDep) -> ArchitectureWriter:
+    """Provide an architecture writer backed by MongoDB."""
+    return MongoArchitectureRepository(database)
+
+
+def get_scrape_job_recorder(database: DatabaseDep) -> ScrapeJobRecorder:
+    """Provide a scrape-job recorder backed by MongoDB."""
+    return MongoScrapeJobRepository(database)
+
+
+def get_scrape_pipeline(settings: SettingsDep) -> ScrapePipeline:
+    """Provide the HTTP scrape pipeline."""
+    return HttpScrapePipeline(settings)
+
+
 ArchitectureReaderDep = Annotated[ArchitectureReader, Depends(get_architecture_reader)]
+ArchitectureWriterDep = Annotated[ArchitectureWriter, Depends(get_architecture_writer)]
+ScrapeJobRecorderDep = Annotated[ScrapeJobRecorder, Depends(get_scrape_job_recorder)]
+ScrapePipelineDep = Annotated[ScrapePipeline, Depends(get_scrape_pipeline)]
+
+
+def get_scrape_service(
+    recorder: ScrapeJobRecorderDep,
+    writer: ArchitectureWriterDep,
+    pipeline: ScrapePipelineDep,
+) -> ScrapeService:
+    """Assemble the scrape orchestration service."""
+    return ScrapeService(recorder, writer, pipeline)
+
+
+ScrapeServiceDep = Annotated[ScrapeService, Depends(get_scrape_service)]

@@ -13,7 +13,7 @@ from app.core.errors import register_exception_handlers
 from app.core.logging import configure_logging
 from app.db.client import create_client
 from app.db.indexes import ensure_indexes
-from app.routers import architectures, health
+from app.routers import architectures, health, scrape
 
 logger = logging.getLogger(__name__)
 
@@ -57,6 +57,7 @@ def create_app() -> FastAPI:
     # surface (CLAUDE.md §6) is mounted under /api/v1.
     app.include_router(health.router)
     app.include_router(architectures.router, prefix=API_V1_PREFIX)
+    app.include_router(scrape.router, prefix=API_V1_PREFIX)
     return app
 
 
