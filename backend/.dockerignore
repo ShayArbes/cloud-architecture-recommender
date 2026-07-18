@@ -1,0 +1,13 @@
+# Keep the build context small and reproducible: never ship local caches,
+# virtualenvs, or secrets into the image.
+.venv/
+**/__pycache__/
+*.pyc
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+tests/
+.env
+.env.*
+!.env.example

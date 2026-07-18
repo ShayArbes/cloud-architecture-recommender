@@ -1,0 +1,8 @@
+# Keep the build context small: dependencies and build output are produced
+# inside the image, never copied from the host.
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+npm-debug.log*
