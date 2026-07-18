@@ -7,7 +7,7 @@ so business logic stays unit-testable with in-memory fakes.
 from typing import Protocol
 
 from app.models.architecture import Architecture
-from app.models.enums import ScrapeJobStatus, TriggerSource
+from app.models.enums import ScrapeJobStatus, TriggerSource, UseCase
 from app.models.scrape_job import ScrapeJob, ScrapeJobError, ScrapeJobStats
 
 
@@ -16,6 +16,28 @@ class ArchitectureWriter(Protocol):
 
     async def upsert(self, architecture: Architecture) -> None:
         """Insert or update by ``source_url`` — scraping is idempotent (§5.1)."""
+        ...
+
+
+class ArchitectureReader(Protocol):
+    """Read access to the architecture inventory."""
+
+    async def list_page(
+        self,
+        *,
+        limit: int,
+        offset: int,
+        use_case: UseCase | None = None,
+        tag: str | None = None,
+    ) -> tuple[list[Architecture], int]:
+        """Return a page of architectures (newest first) and the total match count.
+
+        Filters are ANDed; ``None`` means unfiltered on that dimension.
+        """
+        ...
+
+    async def get_by_slug(self, slug: str) -> Architecture | None:
+        """Fetch one architecture by its public slug, or ``None`` if unknown."""
         ...
 
 
