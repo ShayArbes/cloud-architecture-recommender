@@ -19,6 +19,11 @@
 
 ## 1. Architectural Decisions
 
+### 2026-07-19 — Sprint 5 containerization: unprivileged images + one-shot seed service (DevOps)
+**Context:** S5.1–S5.3 needed production-shaped Docker images and a way to demo the app without live scraping.
+**Decision / Fix:** Backend Dockerfile is multi-stage — a builder installs the project into `/opt/venv`, the slim runtime copies only that venv and runs as non-root `appuser` with a `curl` HEALTHCHECK on `/health`. Frontend builds with Vite then serves via `nginxinc/nginx-unprivileged` (uid 101, port 8080) with an SPA-fallback `nginx.conf`; `VITE_API_BASE_URL` is a **build arg** (baked at build time). Compose runs a one-shot idempotent `seed` service (`python -m app.db.seed`, reusing `cloud-arch-backend:local`) gated on `mongo` healthy, so a fresh `up` is demonstrable. Backend service uses `${VAR:-default}` substitution (not `env_file`) so the stack comes up with **no `.env` present**.
+**Why / Lesson:** `env_file: .env` breaks the "clean clone" AC because a fresh checkout has only `.env.example`; use substitution defaults instead. `VITE_*` vars are compile-time — they cannot be changed at container runtime, only via `--build-arg`. Seeding must stay idempotent (upsert by `source_url`) so re-running `up` never duplicates.
+
 ### 2026-07-16 — Recommendation scoring is deterministic; LLM allowed only for parsing (Architect)
 **Context:** The assignment encourages using AI creatively; it was tempting to have an LLM produce recommendations.
 **Decision / Fix:** The recommendation engine is a pure, deterministic weighted-scoring function (CLAUDE.md §6.3). The Claude API may be used only in the scraping/parsing stage, behind the `ArchitectureParser` protocol, with a rule-based fallback so the app runs with no API key.

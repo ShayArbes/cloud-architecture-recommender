@@ -139,4 +139,4 @@ progress checklist (§2 below) updated.
 - [x] S5.2 docker-compose.yml (mongo + backend + frontend, healthchecks)
 - [x] S5.3 Seed data
 - [x] S5.4 Comprehensive README
-- [ ] S5.5 Final QA (lint, types, tests, e2e walkthrough, Git history review)
+- [x] S5.5 Final QA (lint, types, tests, e2e walkthrough, Git history review)
