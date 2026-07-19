@@ -12,6 +12,7 @@ import logging
 from anthropic import AsyncAnthropic
 
 from app.models.architecture import ArchitectureCharacteristics, ParsedArchitecture
+from app.scraper.parser import SourceHints
 from app.scraper.rules_parser import RulesBasedParser
 
 logger = logging.getLogger(__name__)
@@ -41,14 +42,16 @@ class ClaudeEnrichedParser:
         self._client = client
         self._rules_parser = rules_parser
 
-    async def parse(self, raw_html: str, source_url: str) -> ParsedArchitecture:
+    async def parse(
+        self, raw_html: str, source_url: str, *, hints: SourceHints | None = None
+    ) -> ParsedArchitecture:
         """Parse with rules, then replace characteristics with Claude's inference.
 
         Any LLM failure (network, refusal, unparseable output) is logged and the
         deterministic rules result is returned unchanged — the fallback contract
         of CLAUDE.md §2.
         """
-        base = await self._rules_parser.parse(raw_html, source_url)
+        base = await self._rules_parser.parse(raw_html, source_url, hints=hints)
         try:
             characteristics = await self._infer_characteristics(base)
         except Exception:
