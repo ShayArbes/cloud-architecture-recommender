@@ -1,11 +1,13 @@
 """Rule-based architecture parser — the no-API-key fallback (CLAUDE.md §2).
 
 Extraction strategy per field:
-- title: first ``<h1>``, falling back to ``<title>``.
-- description: meta description → og:description → first substantial paragraph.
-- services: word-boundary regex scan of the *raw* HTML against the service
-  catalog — AWS pages embed much of their content in client-rendered JSON,
-  so visible-text-only scanning misses services.
+- title: ``hints.title`` (authoritative, from discovery) → first ``<h1>`` →
+  ``<title>``. The HTML fallbacks only apply when no hint is supplied.
+- description: ``hints.description`` → meta description → og:description → first
+  substantial paragraph.
+- services: word-boundary regex scan of the page's main content (site chrome —
+  ``<script>``/``<nav>``/``<header>``/``<footer>`` — is stripped first, since it
+  lists every AWS service and would otherwise match dozens on every page).
 - diagram: first ``<img>`` whose src mentions a diagram/architecture.
 - tags: lowercased short service names (e.g. "lambda", "dynamodb").
 """
@@ -18,6 +20,7 @@ from bs4.element import Tag
 from app.core.errors import ScrapeError
 from app.models.architecture import AwsService, ParsedArchitecture
 from app.scraper.characteristics import extract_characteristics
+from app.scraper.parser import SourceHints
 from app.scraper.service_catalog import CATEGORY_PURPOSES, SERVICE_CATALOG
 
 RULES_PARSER_VERSION = "rules-v1"
@@ -25,6 +28,11 @@ RULES_PARSER_VERSION = "rules-v1"
 _MAX_DESCRIPTION_LENGTH = 500
 _MIN_PARAGRAPH_LENGTH = 60
 _DIAGRAM_SRC_HINTS = ("architecture", "diagram")
+
+# Site-chrome elements stripped before service detection: AWS pages carry a
+# global service nav/footer and embedded config in <script> that name every
+# service, which would otherwise be matched as if used by the architecture.
+_CHROME_SELECTORS = ("script", "style", "nav", "header", "footer")
 
 # Boilerplate suffixes AWS appends to page titles.
 _TITLE_SUFFIXES = (" | AWS Solutions", " - Amazon Web Services", " | AWS")
@@ -47,14 +55,22 @@ class RulesBasedParser:
 
     parser_version = RULES_PARSER_VERSION
 
-    async def parse(self, raw_html: str, source_url: str) -> ParsedArchitecture:
-        """Extract a ``ParsedArchitecture`` from ``raw_html`` (no I/O performed)."""
+    async def parse(
+        self, raw_html: str, source_url: str, *, hints: SourceHints | None = None
+    ) -> ParsedArchitecture:
+        """Extract a ``ParsedArchitecture`` from ``raw_html`` (no I/O performed).
+
+        ``hints`` supplies authoritative title/description from discovery; each
+        provided field is preferred over extracting it from the page.
+        """
+        hints = hints or SourceHints()
         soup = BeautifulSoup(raw_html, "html.parser")
-        title = self._extract_title(soup)
+        title = hints.title or self._extract_title(soup)
         if title is None:
             raise ScrapeError("Page has no usable title", details={"source_url": source_url})
-        services = self._extract_services(raw_html)
-        description = self._extract_description(soup)
+        description = hints.description or self._extract_description(soup)
+        diagram_url = self._extract_diagram_url(soup)
+        services = self._extract_services(self._strip_chrome(soup))
         characteristics = extract_characteristics(title, description, services)
         return ParsedArchitecture(
             slug=_slugify(title),
@@ -64,7 +80,7 @@ class RulesBasedParser:
             use_cases=characteristics.use_cases,
             aws_services=services,
             characteristics=characteristics,
-            diagram_url=self._extract_diagram_url(soup),
+            diagram_url=diagram_url,
             tags=[_service_tag(service.name) for service in services],
             parser_version=self.parser_version,
         )
@@ -98,7 +114,18 @@ class RulesBasedParser:
         return ""
 
     @staticmethod
-    def _extract_services(raw_html: str) -> list[AwsService]:
+    def _strip_chrome(soup: BeautifulSoup) -> str:
+        """Return the page HTML minus site chrome, for content-only detection.
+
+        Mutates ``soup`` — callers must extract title/description/diagram first.
+        """
+        for selector in _CHROME_SELECTORS:
+            for element in soup.find_all(selector):
+                element.decompose()
+        return str(soup)
+
+    @staticmethod
+    def _extract_services(content_html: str) -> list[AwsService]:
         services = [
             AwsService(
                 name=definition.name,
@@ -106,7 +133,7 @@ class RulesBasedParser:
                 purpose=CATEGORY_PURPOSES[definition.category],
             )
             for definition in SERVICE_CATALOG
-            if re.search(rf"\b(?:{definition.pattern})\b", raw_html)
+            if re.search(rf"\b(?:{definition.pattern})\b", content_html)
         ]
         return services
 

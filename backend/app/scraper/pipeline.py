@@ -17,7 +17,7 @@ from app.models.scrape_job import ScrapeJobError
 from app.scraper.discovery import ArchitectureUrlDiscoverer
 from app.scraper.factory import create_parser
 from app.scraper.fetcher import PageFetcher, create_http_client
-from app.scraper.parser import ArchitectureParser
+from app.scraper.parser import ArchitectureParser, SourceHints
 from app.scraper.robots import RobotsChecker
 
 logger = logging.getLogger(__name__)
@@ -60,6 +60,12 @@ class HttpScrapePipeline:
             settings.scraper_user_agent, settings.scraper_timeout_seconds
         ) as client:
             discovered = await ArchitectureUrlDiscoverer(client).discover(limit)
+            # Keep the authoritative directory metadata keyed by URL; the parser
+            # prefers it over re-extracting from client-rendered page HTML.
+            hints_by_url = {
+                item.url: SourceHints(title=item.title, description=item.description)
+                for item in discovered
+            }
             robots = RobotsChecker(client, settings.scraper_user_agent)
             allowed = [item.url for item in discovered if await robots.is_allowed(item.url)]
             result.pages_found = len(allowed)
@@ -72,7 +78,9 @@ class HttpScrapePipeline:
             )
             for page in report.pages:
                 try:
-                    result.parsed.append(await parser.parse(page.html, page.url))
+                    result.parsed.append(
+                        await parser.parse(page.html, page.url, hints=hints_by_url.get(page.url))
+                    )
                 except ScrapeError as exc:
                     logger.warning("Parse failed for %s: %s", page.url, exc.message)
                     result.errors.append(ScrapeJobError(url=page.url, reason=exc.message))

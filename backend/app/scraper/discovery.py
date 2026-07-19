@@ -26,10 +26,16 @@ logger = logging.getLogger(__name__)
 
 @dataclass(frozen=True)
 class DiscoveredArchitecture:
-    """A candidate architecture page found in the directory listing."""
+    """A candidate architecture page found in the directory listing.
+
+    ``title`` and ``description`` come straight from the directory API, which is
+    authoritative — the article pages are client-rendered, so re-extracting them
+    from the fetched HTML is unreliable (see ``pipeline`` / ``rules_parser``).
+    """
 
     title: str
     url: str
+    description: str | None = None
 
 
 def _normalize_url(raw_url: str) -> str:
@@ -125,4 +131,9 @@ class ArchitectureUrlDiscoverer:
         if not url.startswith("https://"):
             logger.debug("Skipping non-https directory link: %s", raw_url)
             return None
-        return DiscoveredArchitecture(title=title.strip(), url=url)
+        description = fields.get("description")
+        return DiscoveredArchitecture(
+            title=title.strip(),
+            url=url,
+            description=description.strip() if isinstance(description, str) else None,
+        )

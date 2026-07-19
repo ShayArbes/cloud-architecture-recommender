@@ -65,6 +65,27 @@ async def test_discover_strips_tracking_params_and_deduplicates() -> None:
     ]
 
 
+async def test_discover_captures_description_when_present() -> None:
+    item = {
+        "item": {
+            "additionalFields": {
+                "headline": "Connected Mobility Solution on AWS",
+                "headlineUrl": "https://aws.amazon.com/solutions/connected-mobility/",
+                "description": "  Accelerate connected vehicle applications.  ",
+            }
+        }
+    }
+
+    def serve(request: httpx.Request) -> httpx.Response:
+        page = request.url.params["page"]
+        return httpx.Response(200, json={"items": [item] if page == "0" else []})
+
+    async with make_client(httpx.MockTransport(serve)) as client:
+        results = await ArchitectureUrlDiscoverer(client).discover(limit=1)
+
+    assert results[0].description == "Accelerate connected vehicle applications."
+
+
 async def test_discover_skips_items_without_title_or_url() -> None:
     items = [
         {"item": {"additionalFields": {"headline": "No URL here"}}},
