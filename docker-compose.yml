@@ -1,6 +1,7 @@
-# Sprint 0 (S0.4): MongoDB only — the backend and frontend run locally against it.
-# The backend and frontend services are added in Sprint 5 (S5.2) once their
-# Dockerfiles exist.
+# Full stack (CLAUDE.md §5.2): MongoDB + backend API + built frontend.
+# Configuration comes from a local `.env` (copy from `.env.example`); values
+# below fall back to safe defaults so `docker compose up --build` works with no
+# `.env` present.
 services:
   mongo:
     image: mongo:7
@@ -17,6 +18,65 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+    image: cloud-arch-backend:local
+    container_name: cloud-arch-backend
+    environment:
+      # Values are read from `.env` when present (Compose variable
+      # substitution) and fall back to the defaults below otherwise. Inside the
+      # compose network the database is always reached at the `mongo` service
+      # name, so MONGO_URI is fixed here rather than taken from .env.
+      MONGO_URI: mongodb://mongo:27017
+      MONGO_DB_NAME: ${MONGO_DB_NAME:-cloud_arch_db}
+      ENVIRONMENT: ${ENVIRONMENT:-production}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000,http://localhost:5173}
+      # Optional: empty by default → rule-based parser (CLAUDE.md §2).
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+    ports:
+      - '${API_PORT:-8000}:8000'
+    depends_on:
+      mongo:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # One-shot job: populate the inventory with the curated catalogue so a fresh
+  # environment is demonstrable without live scraping (CLAUDE.md §5.3). Reuses
+  # the backend image, runs to completion, and exits. Seeding is idempotent, so
+  # re-running `up` never duplicates.
+  seed:
+    image: cloud-arch-backend:local
+    build:
+      context: ./backend
+    container_name: cloud-arch-seed
+    command: ['python', '-m', 'app.db.seed']
+    environment:
+      MONGO_URI: mongodb://mongo:27017
+      MONGO_DB_NAME: ${MONGO_DB_NAME:-cloud_arch_db}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    depends_on:
+      mongo:
+        condition: service_healthy
+    restart: 'no'
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # Baked into the bundle at build time. The browser runs on the host, so
+        # it reaches the API via the host-published backend port, not the
+        # compose service name.
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL:-http://localhost:8000/api/v1}
+    container_name: cloud-arch-frontend
+    ports:
+      - '${FRONTEND_PORT:-3000}:8080'
+    depends_on:
+      backend:
+        condition: service_healthy
     restart: unless-stopped
 
 volumes:

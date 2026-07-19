@@ -135,8 +135,8 @@ progress checklist (§2 below) updated.
 - [x] S4.5 Recommendation form + results view
 
 ### Sprint 5 — DevOps & Polish
-- [ ] S5.1 Dockerfiles (backend, frontend)
-- [ ] S5.2 docker-compose.yml (mongo + backend + frontend, healthchecks)
-- [ ] S5.3 Seed data
-- [ ] S5.4 Comprehensive README
-- [ ] S5.5 Final QA (lint, types, tests, e2e walkthrough, Git history review)
+- [x] S5.1 Dockerfiles (backend, frontend)
+- [x] S5.2 docker-compose.yml (mongo + backend + frontend, healthchecks)
+- [x] S5.3 Seed data
+- [x] S5.4 Comprehensive README
+- [x] S5.5 Final QA (lint, types, tests, e2e walkthrough, Git history review)
