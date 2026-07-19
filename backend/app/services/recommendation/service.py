@@ -8,12 +8,14 @@ breakdown) into the response DTO.
 from app.repositories.protocols import ArchitectureReader
 from app.schemas.architecture import ArchitectureSummary
 from app.schemas.recommendation import (
+    FlexibleRecommendationRequest,
     Recommendation,
     RecommendationRequest,
     RecommendationResponse,
 )
 from app.services.recommendation.engine import DEFAULT_TOP_N, recommend
 from app.services.recommendation.explanation import build_explanation
+from app.services.recommendation.normalization import normalize_request
 
 
 class RecommendationService:
@@ -45,3 +47,14 @@ class RecommendationService:
             recommendations=recommendations,
             total_candidates_evaluated=len(candidates),
         )
+
+    async def recommend_flexible(
+        self, request: FlexibleRecommendationRequest, top_n: int = DEFAULT_TOP_N
+    ) -> RecommendationResponse:
+        """Rank from free-text requirements (bonus, CLAUDE.md §6.1).
+
+        Normalizes each free-form field to the nearest enum, then delegates to
+        the same scoring path — the engine is never bypassed or changed. An
+        unmappable value raises a ``ValidationError`` (422).
+        """
+        return await self.recommend(normalize_request(request), top_n)

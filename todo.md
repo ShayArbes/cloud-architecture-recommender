@@ -140,3 +140,15 @@ progress checklist (§2 below) updated.
 - [x] S5.3 Seed data
 - [x] S5.4 Comprehensive README
 - [x] S5.5 Final QA (lint, types, tests, e2e walkthrough, Git history review)
+
+### Bonus — Free-text requirements (scope addition)
+> **Added after the core assignment was complete.** The PDF's optional bonus
+> ("replace the enums with free str") was the one bonus not yet implemented.
+> Per CLAUDE.md §6.1 it is built as a *separate normalization layer in front of
+> the engine* — the strict `POST /recommendations` and the scoring engine are
+> unchanged, so nothing existing is put at risk. Purely additive.
+- [x] B1 Free-text normalizer (`services/recommendation/normalization.py`): maps
+  each free string to the nearest enum (exact → case/separator-normalized →
+  synonym); unmappable value → 422 `UNRECOGNIZED_REQUIREMENT`. Unit-tested.
+- [x] B2 `FlexibleRecommendationRequest` schema + `POST /recommendations/flexible`
+  endpoint reusing the same `RecommendationService` scoring path; README updated.

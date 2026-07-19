@@ -162,3 +162,47 @@ def test_invalid_enum_returns_422(client_with: TestClient) -> None:
     payload = {**VALID_REQUEST, "use_case": "bogus"}
 
     assert client_with.post("/api/v1/recommendations", json=payload).status_code == 422
+
+
+# --- Bonus: free-text endpoint (POST /recommendations/flexible, §6.1) -------
+
+
+def test_flexible_endpoint_ranks_like_the_strict_one(client_with: TestClient) -> None:
+    # VALID_REQUEST is already all strings, so it is a valid free-text payload.
+    response = client_with.post("/api/v1/recommendations/flexible", json=VALID_REQUEST)
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["total_candidates_evaluated"] == 4
+    assert body["recommendations"][0]["architecture"]["slug"] == "perfect"
+
+
+def test_flexible_endpoint_accepts_synonyms_and_casing(client_with: TestClient) -> None:
+    payload = {
+        **VALID_REQUEST,
+        "use_case": "Online Store",
+        "ops_preference": "serverless",
+        "traffic_pattern": "Bursts",
+    }
+
+    response = client_with.post("/api/v1/recommendations/flexible", json=payload)
+
+    assert response.status_code == 200
+    assert response.json()["recommendations"][0]["architecture"]["slug"] == "perfect"
+
+
+def test_flexible_unrecognized_value_returns_422_envelope(client_with: TestClient) -> None:
+    payload = {**VALID_REQUEST, "use_case": "teleportation"}
+
+    response = client_with.post("/api/v1/recommendations/flexible", json=payload)
+
+    assert response.status_code == 422
+    error = response.json()["error"]
+    assert error["code"] == "UNRECOGNIZED_REQUIREMENT"
+    assert error["details"]["field"] == "use_case"
+
+
+def test_flexible_missing_field_returns_422(client_with: TestClient) -> None:
+    payload = {k: v for k, v in VALID_REQUEST.items() if k != "scale"}
+
+    assert client_with.post("/api/v1/recommendations/flexible", json=payload).status_code == 422

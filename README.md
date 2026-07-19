@@ -146,6 +146,7 @@ Base path `/api/v1`; interactive docs at `/docs`, OpenAPI schema at
 | `GET` | `/scrape/jobs/{job_id}` | Job status + stats (polled by the frontend) |
 | `GET` | `/scrape/jobs` | Recent job history |
 | `POST` | `/recommendations` | 9-field requirements → ranked recommendations |
+| `POST` | `/recommendations/flexible` | Same 9 fields as **free text**, normalized to the enums (bonus) |
 | `GET` | `/health` | Liveness + MongoDB ping (Docker healthcheck) |
 
 ### Recommendation request
@@ -168,6 +169,17 @@ All nine fields are required enums (see `/docs` for the exact value sets):
 
 The response returns the top matches, each with a `score` in `[0, 1]`, a per-dimension
 `match_breakdown`, and a template `explanation` generated from that breakdown.
+
+#### Free-text requirements (bonus)
+
+`POST /recommendations/flexible` accepts the same nine fields as **free strings**
+(e.g. `"use_case": "online store"`, `"ops_preference": "serverless"`, `"scale": "big"`).
+A deterministic normalization step maps each value to the nearest enum — case- and
+separator-insensitive, with a curated synonym table — and then hands a strict request
+to the **same** scoring engine. An unmappable value returns `422` with a
+`UNRECOGNIZED_REQUIREMENT` code naming the field, the received value, and the allowed
+options. The engine itself is never changed or bypassed (see
+`services/recommendation/normalization.py`).
 
 ---
 
